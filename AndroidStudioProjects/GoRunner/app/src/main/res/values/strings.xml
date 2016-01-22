@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GoRunner</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_splash">GoRunner</string>
+</resources>
