@@ -14,23 +14,18 @@
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.Dark" >
         </activity>
-
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppTheme.Dark" />
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_home"
-            android:parentActivityName=".LoginActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="lhy.gorunner.LoginActivity" />
-        </activity>
-
-        <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/SplashTheme" >
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

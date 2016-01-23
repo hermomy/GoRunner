@@ -5,7 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
+import android.widget.GridView;
+import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,15 +20,21 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        GridView gridView = (GridView) findViewById(R.id.grid_view);
+
+        // Instance of ImageAdapter Class
+        gridView.setAdapter(new ImageAdapter(this));
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.main_activity_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+
     }
 
 }
