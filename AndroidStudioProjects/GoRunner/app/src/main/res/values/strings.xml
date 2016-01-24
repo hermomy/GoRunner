@@ -6,4 +6,6 @@
     <string name="title_activity_home">Home</string>
     <string name="title_activity_splash">GoRunner</string>
     <string name="action_home">Home</string>
+    <string name="openDrawer">openDrawer</string>
+    <string name="closeDrawer">closeDrawer</string>
 </resources>

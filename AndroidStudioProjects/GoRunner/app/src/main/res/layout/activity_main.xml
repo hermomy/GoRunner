@@ -6,17 +6,29 @@
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context="lhy.gorunner.MainActivity">
 
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:background="@color/primary" app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:theme="@style/Theme.AppCompat" android:elevation="2dp"/>
+    <android.support.v4.widget.DrawerLayout
 
-    </android.support.design.widget.AppBarLayout>
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/DrawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="7dp"
+        android:nestedScrollingEnabled="false"
+        android:clickable="true">
 
     <include layout="@layout/content_main" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerView"
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
 
+        android:background="#ffffff"
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
+
+
+    </android.support.v4.widget.DrawerLayout>
 </android.support.design.widget.CoordinatorLayout>
