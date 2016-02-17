@@ -21,7 +21,9 @@
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/SplashTheme" >
+
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -31,6 +33,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Post_Task_Activity"
+            android:label="@string/title_activity_post__task_"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 

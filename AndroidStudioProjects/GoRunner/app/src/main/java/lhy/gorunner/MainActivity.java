@@ -1,9 +1,12 @@
 package lhy.gorunner;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,14 +19,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     ViewPager pager;
     ViewPagerAdapter adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Home","Events"};
-    int Numboftabs =2;
+    CharSequence Titles[]={"Tasks","Events","Mail"};
+    int Numboftabs =3;
     private Toolbar toolbar;
+    MaterialDialog mMaterialDialog = new MaterialDialog(this);;
 
     //First We Declare Titles And Icons For Our Navigation Drawer List View
     //This Icons And Titles Are holded in an Array as you can see
@@ -79,7 +85,36 @@ public class MainActivity extends AppCompatActivity {
 
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
-                    Toast.makeText(MainActivity.this,"The Item Clicked is: "+recyclerView.getChildPosition(child), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this,"The Item Clicked is: "+recyclerView.getChildAdapterPosition(child), Toast.LENGTH_SHORT).show();
+
+                    if(recyclerView.getChildAdapterPosition(child)==5){
+
+                        mMaterialDialog.setTitle("Logout");
+                        mMaterialDialog.setMessage("Are you sure want to log out?");
+                        mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                                intent.putExtra("finish", true); // if you are checking for this in your other Activities
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        });
+                        mMaterialDialog.setNegativeButton("CANCEL",new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mMaterialDialog.dismiss();
+
+                            }
+                        });
+                        mMaterialDialog.show();
+
+
+
+                    }
                     return true;
 
                 }
@@ -119,8 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 // Code here will execute once drawer is closed
             }
 
-
-
         }; // Drawer Toggle Object Made
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
@@ -148,12 +181,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
-
-
-
+        
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
