@@ -48,7 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
             Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
             if(position==1) {
-                Intent i1 = new Intent(context, LoginActivity.class);
+                Intent i1 = new Intent(context, Browse_Activity.class);
                 context.startActivity(i1);
             }
         }
