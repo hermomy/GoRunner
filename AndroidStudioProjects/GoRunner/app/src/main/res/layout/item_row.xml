@@ -22,5 +22,4 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/rowText" />
-
 </LinearLayout>

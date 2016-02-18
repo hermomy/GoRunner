@@ -1,5 +1,7 @@
 package lhy.gorunner;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -17,15 +20,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
+import java.util.List;
 
 import me.drakeet.materialdialog.MaterialDialog;
 
 public class MainActivity extends AppCompatActivity {
 
     ViewPager pager;
-    ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
     CharSequence Titles[]={"Tasks","Events","Mail"};
     int Numboftabs =3;
     private Toolbar toolbar;
@@ -43,11 +48,14 @@ public class MainActivity extends AppCompatActivity {
     String NAME = "Hau Yang";
     String EMAIL = "khcy3lha@nottingham.edu.my";
     int PROFILE = R.mipmap.ic_launcher;
-
+    // Declaring DrawerLayout
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
+    DrawerLayout Drawer;
+
+
+    RecyclerView recyclerView;
 
     ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
 
@@ -59,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        //Drawer
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
 
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
@@ -160,28 +169,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
-        adapter =  new ViewPagerAdapter(getSupportFragmentManager(),Titles,Numboftabs);
+        recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        RecyclerAdapter adapter=new RecyclerAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
 
-        // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        //Layout manager for Recycler view
 
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
-        
+
     }
 
     @Override
