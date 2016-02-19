@@ -41,7 +41,6 @@
             android:textColor="#000000"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="2 hours ago"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="14sp" />
 
@@ -56,7 +55,6 @@
             android:textColor="#000000"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="RM150"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="14sp" />
     </RelativeLayout>

@@ -11,44 +11,49 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.Dark" >
         </activity>
-
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppTheme.Dark" />
-
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/SplashTheme" >
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
         <activity
             android:name=".Browse_Activity"
             android:label="@string/title_activity_post__task_"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
-        <activity android:name=".TaskDetailActivity"
+        <activity
+            android:name=".TaskDetailActivity"
             android:label="Task Details"
             android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".MakeOfferActivity"
+            android:label="Make an Offer"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
+        <activity android:name=".ConfirmOfferActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Confirm your Offer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
