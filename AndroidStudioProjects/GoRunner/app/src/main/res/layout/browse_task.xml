@@ -6,18 +6,6 @@
     android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context="lhy.gorunner.Browse_Activity">
 
-        <android.support.v7.widget.RecyclerView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/my_recycler_view2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="16dp"
-            android:paddingTop="5dp"
-            android:scrollbars="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-
     <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
         android:id="@+id/app_bar"
         android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
@@ -28,6 +16,20 @@
             ></include>
 
     </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/my_recycler_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            android:paddingTop="?android:attr/actionBarSize"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+
+
 
 
 </android.support.design.widget.CoordinatorLayout>

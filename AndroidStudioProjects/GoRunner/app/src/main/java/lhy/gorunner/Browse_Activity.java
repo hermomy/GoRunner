@@ -1,5 +1,6 @@
 package lhy.gorunner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,6 +52,10 @@ public class Browse_Activity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_home){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+    }
         return super.onOptionsItemSelected(item);
     }
 }

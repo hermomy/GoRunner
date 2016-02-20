@@ -119,7 +119,7 @@
             </LinearLayout>
 
 
-               <Button
+               <android.support.v7.widget.AppCompatButton
                    android:id="@+id/offer_btn"
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"

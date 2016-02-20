@@ -1,8 +1,12 @@
 package lhy.gorunner;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,10 +21,40 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         findViewById(R.id.offer_btn).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(TaskDetailActivity.this,"The Item Clicked is" , Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MakeOfferActivity.class);
+                startActivity(intent);
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if(id == R.id.action_home){
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 

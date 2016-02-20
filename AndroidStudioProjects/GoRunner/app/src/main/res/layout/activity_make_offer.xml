@@ -101,7 +101,8 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/make_offer_continue_btn"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
 
