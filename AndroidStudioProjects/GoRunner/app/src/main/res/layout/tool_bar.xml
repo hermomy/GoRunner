@@ -5,5 +5,11 @@
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/toolbar_icon"/>
+
 </android.support.v7.widget.Toolbar>
 

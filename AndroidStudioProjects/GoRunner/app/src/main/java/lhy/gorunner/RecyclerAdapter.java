@@ -13,7 +13,7 @@ import android.widget.Toast;
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
-    int[] name = {R.drawable.test, R.drawable.test2, R.drawable.test3,R.drawable.test4,R.drawable.test5};
+    int[] name = {R.drawable.test, R.drawable.test2, R.drawable.test3,R.drawable.test4,R.drawable.test5_1};
     Context context;
     LayoutInflater inflater;
 
@@ -46,7 +46,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             RecyclerViewHolder vholder = (RecyclerViewHolder) v.getTag();
             int position = vholder.getPosition();
 
-            Toast.makeText(context,"This is position "+position,Toast.LENGTH_LONG ).show();
             if(position==1) {
                 Intent i1 = new Intent(context, Browse_Activity.class);
                 context.startActivity(i1);

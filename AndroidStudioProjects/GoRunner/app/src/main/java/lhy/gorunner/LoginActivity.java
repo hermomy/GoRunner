@@ -68,8 +68,12 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if(email.equals("lhy@hotmail.com")&& password.equals("0000")){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
+        }
+
+        else{
+            onLoginFailed();
         }
         // TODO: Implement your own authentication logic here.
 
@@ -110,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Wrong username/password", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }

@@ -1,6 +1,7 @@
 package lhy.gorunner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,10 @@ import android.widget.Toast;
  */
 public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
 
-    String[] name = {"Graphic design work", "Social media promoting"};
-    int[] picture = {R.drawable.user_pic,R.drawable.user2_pic};
-    String[] pay = {"RM100","RM50"};
+    String[] name = {"Graphic design work", "Social media promoting","Data Entry","Mcdonald's delivery","150 Facebook Likes","Write a resume"};
+    int[] picture = {R.drawable.user_pic,R.drawable.user3_pic,R.drawable.user2_pic,R.drawable.user_pic,R.drawable.user_pic,R.drawable.user_pic,};
+    String[] pay = {"RM100","RM50","RM300","RM250","RM450","RM150"};
+    String[] time = {"2 hours ago","2 hours ago","2 hours ago","3 hours ago","4 hours ago","4 hours ago"};
     Context context;
     LayoutInflater inflater;
 
@@ -36,6 +38,7 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
 
         holder.tv1.setText(name[position]);
         holder.tv2.setText(pay[position]);
+        holder.tv3.setText(time[position]);
         holder.imageView.setImageResource(picture[position]);
         holder.tv1.setOnClickListener(clickListener);
         holder.tv1.setTag(holder);
@@ -48,7 +51,14 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
             RecyclerViewHolder2 vholder = (RecyclerViewHolder2) v.getTag();
             int position = vholder.getPosition();
 
-            Toast.makeText(context, "This is position " + position, Toast.LENGTH_LONG).show();
+            if(position==0){
+                Intent i1 = new Intent(context, TaskDetailActivity.class);
+                context.startActivity(i1);
+            }
+
+
+
+
 
         }
     };

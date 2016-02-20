@@ -10,7 +10,7 @@ import android.widget.TextView;
  */
 public class RecyclerViewHolder2 extends RecyclerView.ViewHolder {
 
-    TextView tv1, tv2;
+    TextView tv1, tv2,tv3;
     ImageView imageView;
 
     public RecyclerViewHolder2(View itemView) {
@@ -18,6 +18,7 @@ public class RecyclerViewHolder2 extends RecyclerView.ViewHolder {
 
         tv1 = (TextView) itemView.findViewById(R.id.list_title_browse);
         tv2 = (TextView) itemView.findViewById(R.id.list_desc_browse);
+        tv3 = (TextView) itemView.findViewById(R.id.list_time);
         imageView = (ImageView) itemView.findViewById(R.id.list_avatar_browse);
 
     }

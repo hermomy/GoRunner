@@ -30,16 +30,14 @@ import me.drakeet.materialdialog.MaterialDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager pager;
-    CharSequence Titles[]={"Tasks","Events","Mail"};
-    int Numboftabs =3;
+
     private Toolbar toolbar;
     MaterialDialog mMaterialDialog = new MaterialDialog(this);;
 
     //First We Declare Titles And Icons For Our Navigation Drawer List View
     //This Icons And Titles Are holded in an Array as you can see
 
-    String TITLES[] = {"Home","Profile","Dashboard","Settings","Logout"};
+    String TITLES[] = {"Home","Profile","My Task","Settings","Logout"};
     int ICONS[] = {R.mipmap.ic_homeblack,R.mipmap.ic_personblack,R.mipmap.ic_dashblack,R.mipmap.ic_settingsblack,R.mipmap.ic_powerblack};
 
     //Similarly we Create a String Resource for the name and email in the header view
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     String NAME = "Hau Yang";
     String EMAIL = "khcy3lha@nottingham.edu.my";
-    int PROFILE = R.mipmap.ic_launcher;
+    int PROFILE = R.drawable.user_pic;
     // Declaring DrawerLayout
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
@@ -94,33 +92,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
-                    //Toast.makeText(MainActivity.this,"The Item Clicked is: "+recyclerView.getChildAdapterPosition(child), Toast.LENGTH_SHORT).show();
 
                     if(recyclerView.getChildAdapterPosition(child)==5){
 
-                        mMaterialDialog.setTitle("Logout");
-                        mMaterialDialog.setMessage("Are you sure want to log out?");
-                        mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                intent.putExtra("finish", true); // if you are checking for this in your other Activities
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                                finish();
-
-                            }
-                        });
-                        mMaterialDialog.setNegativeButton("CANCEL",new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mMaterialDialog.dismiss();
-
-                            }
-                        });
-                        mMaterialDialog.show();
-
+                        doSelectedAction(recyclerView.getChildAdapterPosition(child));
 
 
                     }
@@ -207,5 +182,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void doSelectedAction (int position){
 
+        if (position == 2 ){
+
+        }
+        if (position == 5){
+            mMaterialDialog.setTitle("Logout");
+            mMaterialDialog.setMessage("Are you sure want to log out?");
+            mMaterialDialog.setPositiveButton("OK", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.putExtra("finish", true); // if you are checking for this in your other Activities
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+
+                }
+            });
+            mMaterialDialog.setNegativeButton("CANCEL",new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMaterialDialog.dismiss();
+
+                }
+            });
+            mMaterialDialog.show();
+
+        }
+    }
 }

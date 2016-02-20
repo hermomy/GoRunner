@@ -27,6 +27,7 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" >
+
         </activity>
         <activity
             android:name=".Browse_Activity"
@@ -42,12 +43,15 @@
             android:name=".MakeOfferActivity"
             android:label="Make an Offer"
             android:theme="@style/AppTheme.NoActionBar" >
-
         </activity>
-
-        <activity android:name=".ConfirmOfferActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="Confirm your Offer">
+        <activity
+            android:name=".ConfirmOfferActivity"
+            android:label="Confirm Offer"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
