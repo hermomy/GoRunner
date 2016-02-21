@@ -93,12 +93,11 @@ public class MainActivity extends AppCompatActivity {
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     Drawer.closeDrawers();
 
-                    if(recyclerView.getChildAdapterPosition(child)==5){
+
 
                         doSelectedAction(recyclerView.getChildAdapterPosition(child));
 
 
-                    }
                     return true;
 
                 }
@@ -185,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
     public void doSelectedAction (int position){
 
         if (position == 2 ){
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
 
         }
         if (position == 5){
