@@ -6,15 +6,14 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Frag_location extends Fragment {
+public class Frag_confirm extends Fragment {
 
 
-    public Frag_location() {
+    public Frag_confirm() {
         // Required empty public constructor
     }
 
@@ -24,7 +23,7 @@ public class Frag_location extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_frag_location, container, false);
+        return inflater.inflate(R.layout.fragment_frag_confirm, container, false);
 
 
 

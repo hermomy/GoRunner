@@ -56,14 +56,15 @@ public class CreateTaskActivity extends AppCompatActivity {
     public void selectFrag(View view) {
         Fragment fr;
         ImageView img1 = (ImageView)findViewById(R.id.step2);
-
+        ImageView img2 = (ImageView)findViewById(R.id.step3);
         if(view == findViewById(R.id.button1)) {
-            fr = new MapFragment();
+            fr = new Frag_Map();
             img1.setImageResource(R.drawable.step2);
-
         }
-        else {
-            fr = new MapFragment();
+        else{
+
+            fr = new Frag_confirm();
+            img2.setImageResource(R.drawable.step3);
         }
 
         FragmentManager fm = getFragmentManager();

@@ -202,7 +202,7 @@
                 android:id="@+id/submit_offer_btn"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-
+                android:textColor="@color/white"
                 android:text="SUBMIT OFFER"
                 android:background="@drawable/rounded_corner2"
                 />
