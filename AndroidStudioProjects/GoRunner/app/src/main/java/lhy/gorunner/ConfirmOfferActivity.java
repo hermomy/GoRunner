@@ -22,6 +22,7 @@ public class ConfirmOfferActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm_offer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
         ButterKnife.inject(this);
 
         _submitOfferButton.setOnClickListener(new View.OnClickListener() {

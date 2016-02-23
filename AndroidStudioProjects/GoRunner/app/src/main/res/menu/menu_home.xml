@@ -2,9 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item android:id="@+id/action_home"
-        android:orderInCategory="100"
+        android:orderInCategory="200"
         android:icon="@mipmap/ic_home"
         android:title="Home"
         app:showAsAction="always" />
+
+    <item android:id="@+id/action_create"
+        android:orderInCategory="100"
+        android:icon="@mipmap/ic_create"
+        android:title="New task"
+        app:showAsAction="always"></item>
 
 </menu>

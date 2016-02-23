@@ -12,31 +12,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
-public class CreateTaskActivity extends AppCompatActivity {
-
-    @InjectView(R.id.button3) Button _PostTask;
+public class MyTaskActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_task);
+        setContentView(R.layout.activity_my_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,7 +32,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -66,30 +51,47 @@ public class CreateTaskActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void selectFrag(View view) {
+    public void nextFrag(View view) {
         Fragment fr;
-        ImageView img1 = (ImageView)findViewById(R.id.step2);
-        ImageView img2 = (ImageView)findViewById(R.id.step3);
-        if(view == findViewById(R.id.button1)) {
-            fr = new Frag_Map();
-            img1.setImageResource(R.drawable.step2);
+        ImageView img1 = (ImageView)findViewById(R.id.first_arrow);
+        ImageView img2 = (ImageView)findViewById(R.id.moneybag);
+        if(view == findViewById(R.id.payment_btn)) {
+            fr = new Frag_payment();
+            img1.setImageResource(R.drawable.arrow_green);
+
         }
-        else{
+        else if (view == findViewById(R.id.made_payment_btn)){
+            final ProgressDialog progressDialog = new ProgressDialog(this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Adding payment to myPay...");
+            progressDialog.show();
 
-            fr = new Frag_confirm();
-            img2.setImageResource(R.drawable.step3);
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            // On complete call either onLoginSuccess or onLoginFailed
+                            // onLoginFailed();
+
+                            progressDialog.dismiss();
+                        }
+                    }, 3000);
+            fr = new Frag_release();
+            img2.setImageResource(R.drawable.money_bag_filled);
 
 
+        }
+
+        else {
+            fr = null;
         }
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_create, fr);
+        fragmentTransaction.replace(R.id.fragment_mytask, fr);
         fragmentTransaction.commit();
 
     }
-
-
 
 
 }

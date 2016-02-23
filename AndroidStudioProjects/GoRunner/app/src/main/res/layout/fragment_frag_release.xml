@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="lhy.gorunner.Frag_payment"
+    android:clickable="true"
+    android:background="?android:colorBackground">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/column_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_cornergreen">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lock"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/column_word"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:height="15dp"
+            android:text="Payment Secured"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            android:background="#d3d3d3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RM100"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:textSize="30dp"/>
+
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/release_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Release"
+                android:textSize="15dp"
+                android:layout_marginTop="25dp"
+                android:textColor="#FFFFFF"
+                android:background="#c20000"
+                android:clickable="true"
+                android:onClick="nextFrag"/>
+</LinearLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+  >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="* You must wait for the Runner to complete the task and request payment on completion in order to release the payment into their verified bank."/>
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>
