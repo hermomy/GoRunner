@@ -1,144 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:fitsSystemWindows="true"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-    tools:context="lhy.gorunner.MyTaskActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="lhy.gorunner.MyTaskActivity" android:fitsSystemWindows="true">
 
-<android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-    android:id="@+id/app_bar"
-    android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"
-        ></include>
-</android.support.design.widget.AppBarLayout>
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"
+            ></include>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:fillViewport="false">
+    </android.support.design.widget.AppBarLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:paddingTop="?android:attr/actionBarSize"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Task: Android Material Design"
-            android:textColor="@color/black"
-            android:layout_marginTop="10dp"
-            />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="30dp"
+        android:orientation="vertical"
         >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You"
-        android:textSize="10sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trust Account"
-        android:textSize="10sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="65dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Steven"
-        android:textColor="@color/black"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="55dp"
-        android:textSize="10sp"
-        />
-
-</LinearLayout>
-
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/my_recycler_view3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="30dp"
-            >
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/user3_pic"/>
-
-
-         <ImageView
-             android:id="@+id/first_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:src="@drawable/arrow_red"
-             android:layout_marginTop="5dp" />
-
-            <ImageView
-                android:id="@+id/moneybag"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/money_bag_empty"
-               android:layout_gravity="center"
-                />
-
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:src="@drawable/arrow_red"
-                android:layout_marginTop="5dp"
-                />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/user_pic"/>
-
-
-
-        </LinearLayout>
-
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="lhy.gorunner.Frag_desc"
-            android:id="@+id/fragment_mytask"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"></LinearLayout>
+            android:clipToPadding="false"
+            android:paddingBottom="16dp"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
     </LinearLayout>
-
-    </ScrollView>
-
 </android.support.design.widget.CoordinatorLayout>

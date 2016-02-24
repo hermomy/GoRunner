@@ -1,27 +1,34 @@
 package lhy.gorunner;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 public class MyTaskActivity extends AppCompatActivity {
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+
+
+        recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view3);
+
+        RecyclerAdapter3 adapter=new RecyclerAdapter3(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+
+        //Layout manager for Recycler view
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -50,48 +57,4 @@ public class MyTaskActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void nextFrag(View view) {
-        Fragment fr;
-        ImageView img1 = (ImageView)findViewById(R.id.first_arrow);
-        ImageView img2 = (ImageView)findViewById(R.id.moneybag);
-        if(view == findViewById(R.id.payment_btn)) {
-            fr = new Frag_payment();
-            img1.setImageResource(R.drawable.arrow_green);
-
-        }
-        else if (view == findViewById(R.id.made_payment_btn)){
-            final ProgressDialog progressDialog = new ProgressDialog(this,
-                    R.style.AppTheme_Dark_Dialog);
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("Adding payment to myPay...");
-            progressDialog.show();
-
-            new android.os.Handler().postDelayed(
-                    new Runnable() {
-                        public void run() {
-                            // On complete call either onLoginSuccess or onLoginFailed
-                            // onLoginFailed();
-
-                            progressDialog.dismiss();
-                        }
-                    }, 3000);
-            fr = new Frag_release();
-            img2.setImageResource(R.drawable.money_bag_filled);
-
-
-        }
-
-        else {
-            fr = null;
-        }
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_mytask, fr);
-        fragmentTransaction.commit();
-
-    }
-
-
 }

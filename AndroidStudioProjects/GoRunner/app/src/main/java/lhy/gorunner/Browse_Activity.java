@@ -2,9 +2,13 @@ package lhy.gorunner;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +19,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Browse_Activity extends AppCompatActivity {
@@ -23,11 +28,14 @@ public class Browse_Activity extends AppCompatActivity {
     private boolean isSearchOpened = false;
     private EditText edtSeach;
     RecyclerView recyclerView;
+    int mutedColor = R.attr.colorPrimary;
+    CollapsingToolbarLayout collapsingToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.browse_task);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
 
         recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view2);
@@ -39,6 +47,24 @@ public class Browse_Activity extends AppCompatActivity {
         //Layout manager for Recycler view
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        ImageView header = (ImageView) findViewById(R.id.header);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                R.drawable.test5);
+
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            @SuppressWarnings("ResourceType")
+            @Override
+            public void onGenerated(Palette palette) {
+
+                mutedColor = palette.getMutedColor(R.color.primary);
+                collapsingToolbar.setContentScrimColor(mutedColor);
+                collapsingToolbar.setStatusBarScrimColor(R.color.black);
+            }
+        });
     }
 
     @Override
