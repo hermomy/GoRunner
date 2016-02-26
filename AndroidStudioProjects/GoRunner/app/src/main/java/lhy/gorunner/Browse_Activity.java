@@ -30,13 +30,32 @@ public class Browse_Activity extends AppCompatActivity {
     RecyclerView recyclerView;
     int mutedColor = R.attr.colorPrimary;
     CollapsingToolbarLayout collapsingToolbar;
-
+ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.browse_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
+
+        int imageview_url = getIntent().getIntExtra("EXTRA_IMAGEVIEW_URL",0);
+        image = (ImageView) findViewById(R.id.header);
+        if (imageview_url == 0){
+
+            image.setImageResource(R.drawable.test);
+        }
+        else if (imageview_url == 1){
+            image.setImageResource(R.drawable.test2);
+        }
+        else if (imageview_url == 2){
+            image.setImageResource(R.drawable.test3);
+        }
+        else if (imageview_url == 3){
+            image.setImageResource(R.drawable.test4);
+        }
+        else if (imageview_url == 4){
+            image.setImageResource(R.drawable.test5_1);
+        }
 
         recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view2);
 
@@ -48,23 +67,24 @@ public class Browse_Activity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ImageView header = (ImageView) findViewById(R.id.header);
+        collapsingToolbar.setContentScrimColor(getResources().getColor(R.color.primary));
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.test5);
-
-        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
-            @SuppressWarnings("ResourceType")
-            @Override
-            public void onGenerated(Palette palette) {
-
-                mutedColor = palette.getMutedColor(R.color.primary);
-                collapsingToolbar.setContentScrimColor(mutedColor);
-                collapsingToolbar.setStatusBarScrimColor(R.color.black);
-            }
-        });
+//
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+//                R.drawable.test5_1);
+//
+//        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+//            @SuppressWarnings("ResourceType")
+//            @Override
+//            public void onGenerated(Palette palette) {
+//
+//                mutedColor = palette.getMutedColor(R.color.primary);
+//                collapsingToolbar.setContentScrimColor(mutedColor);
+//                collapsingToolbar.setStatusBarScrimColor(R.color.black);
+//            }
+//        });
     }
 
     @Override
@@ -90,7 +110,9 @@ public class Browse_Activity extends AppCompatActivity {
 
         if (id == R.id.action_home){
             Intent intent = new Intent(this, MainActivity.class);
+            finish();
             startActivity(intent);
+
     }
 
         if (id == R.id.action_search){

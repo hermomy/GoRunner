@@ -10,12 +10,13 @@ import android.widget.Button;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import me.drakeet.materialdialog.MaterialDialog;
 
 public class ConfirmOfferActivity extends AppCompatActivity {
 
     @InjectView(R.id.submit_offer_btn) Button _submitOfferButton;
     @InjectView(R.id.cancel_submit_offer_btn) Button _cancelsubmitOfferButton;
-
+    MaterialDialog mMaterialDialog = new MaterialDialog(this);;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,8 @@ public class ConfirmOfferActivity extends AppCompatActivity {
                             public void run() {
                                 // On complete call either onLoginSuccess or onLoginFailed
                                 // onLoginFailed();
+                                Intent intent = new Intent(getApplicationContext(), MyTaskActivity.class);
+                                startActivity(intent);
                                 progressDialog.dismiss();
                             }
                         }, 3000);
@@ -52,8 +55,29 @@ public class ConfirmOfferActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TaskDetailActivity.class);
-                startActivity(intent);
+                mMaterialDialog.setTitle("Logout");
+                mMaterialDialog.setMessage("Are you sure want to cancel offer?");
+                mMaterialDialog.setPositiveButton("YES", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent(ConfirmOfferActivity.this, Browse_Activity.class);
+                        intent.putExtra("finish", true); // if you are checking for this in your other Activities
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+                mMaterialDialog.setNegativeButton("CANCEL",new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mMaterialDialog.dismiss();
+
+                    }
+                });
+                mMaterialDialog.show();
+
             }
 
         });

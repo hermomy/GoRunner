@@ -16,4 +16,6 @@
         <color name="white">#FFFFFF</color>
 
         <color name="tabsScrollColor">#8a140e</color>
+        <color name="title">#666666</color>
+    <color name="time_comment">#a6a6a6</color>
     </resources>

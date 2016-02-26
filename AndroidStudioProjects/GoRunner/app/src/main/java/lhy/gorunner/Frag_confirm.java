@@ -2,6 +2,7 @@ package lhy.gorunner;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -46,7 +47,8 @@ public class Frag_confirm extends Fragment implements View.OnClickListener {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
                         // onLoginFailed();
-
+                        Intent intent = new Intent(getContext(), Browse_Activity.class);
+                        startActivity(intent);
                         progressDialog.dismiss();
                     }
                 }, 3000);

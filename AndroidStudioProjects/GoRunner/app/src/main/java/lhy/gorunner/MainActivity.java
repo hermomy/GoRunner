@@ -187,11 +187,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void doSelectedAction (int position){
 
+
         if (position == 2 ){
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
 
         }
+
+        if (position == 3 ){
+            Intent intent = new Intent (MainActivity.this,MyTaskActivity.class);
+            startActivity(intent);
+        }
+
         if (position == 5){
             mMaterialDialog.setTitle("Logout");
             mMaterialDialog.setMessage("Are you sure want to log out?");

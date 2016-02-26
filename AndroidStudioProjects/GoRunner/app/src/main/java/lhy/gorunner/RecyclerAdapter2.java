@@ -15,8 +15,10 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
 
     String[] name = {"Graphic design work", "Social media promoting","Data Entry","Mcdonald's delivery","150 Facebook Likes","Write a resume"};
     int[] picture = {R.drawable.user_pic,R.drawable.user3_pic,R.drawable.user2_pic,R.drawable.user_pic,R.drawable.user_pic,R.drawable.user_pic,};
-    String[] pay = {"RM100","RM50","RM300","RM250","RM450","RM150"};
+    String[] pay = {"RM100","RM500","RM300","RM250","RM450","RM150"};
     String[] time = {"2 hours ago","2 hours ago","2 hours ago","3 hours ago","4 hours ago","4 hours ago"};
+    String[] location = {"Selangor","Kuala Lumpur","Ipoh","Perak","Perak","Johor Bahru"};
+    String[] comment = {"2 Comments, 3 Offers","3 Comments, 0 Offers","1 Comments, 1 Offers","5 Comments, 1 Offers","2 Comments, 0 Offers","0 Comments, 0 Offers"};
     Context context;
     LayoutInflater inflater;
 
@@ -39,6 +41,9 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
         holder.tv1.setText(name[position]);
         holder.tv2.setText(pay[position]);
         holder.tv3.setText(time[position]);
+        holder.tv4.setText(location[position]);
+
+        holder.tv5.setText(comment[position]);
         holder.imageView.setImageResource(picture[position]);
         holder.tv1.setOnClickListener(clickListener);
         holder.tv1.setTag(holder);
