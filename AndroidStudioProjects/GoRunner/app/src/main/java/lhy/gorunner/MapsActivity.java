@@ -36,19 +36,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Getting GoogleMap object from the fragment
 
-        // Enabling MyLocation Layer of Google Map
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    public void requestPermissions(@NonNull String[] permissions, int requestCode)
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for Activity#requestPermissions for more details.
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
 
         // Getting LocationManager object from System Service LOCATION_SERVICE
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

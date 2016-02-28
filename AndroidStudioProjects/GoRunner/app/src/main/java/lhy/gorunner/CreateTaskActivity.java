@@ -33,8 +33,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-
-
     }
 
 
@@ -61,7 +59,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_home){
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -73,6 +72,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         if(view == findViewById(R.id.button1)) {
             fr = new Frag_Map();
             img1.setImageResource(R.drawable.step2);
+
+
         }
         else{
 

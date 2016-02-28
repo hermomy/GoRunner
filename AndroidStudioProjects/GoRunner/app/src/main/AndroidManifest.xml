@@ -48,7 +48,11 @@
             android:name=".Browse_Activity"
             android:label=""
             android:theme="@style/AppTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".TaskDetailActivity"
@@ -68,15 +72,13 @@
         <activity
             android:name=".ProfileActivity"
             android:label="Profile" >
+
+
         </activity>
         <activity
             android:name=".CreateTaskActivity"
             android:label="Create Task" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

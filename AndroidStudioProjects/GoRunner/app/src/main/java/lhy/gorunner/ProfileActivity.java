@@ -1,5 +1,6 @@
 package lhy.gorunner;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -38,8 +40,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_home){
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

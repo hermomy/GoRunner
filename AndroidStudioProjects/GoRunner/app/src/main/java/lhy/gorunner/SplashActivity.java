@@ -14,9 +14,18 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+        final Intent intent = new Intent(this, LoginActivity.class);
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        // On complete call either onSignupSuccess or onSignupFailed
+                        // depending on success
+
+                        startActivity(intent);
+                        finish();
+                    }
+                }, 1000);
+
     }
 
 }

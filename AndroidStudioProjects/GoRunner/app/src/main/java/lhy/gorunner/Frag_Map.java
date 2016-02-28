@@ -34,6 +34,7 @@ public class Frag_Map extends Fragment {
     GoogleMap map;
     private TextView locationText;
     private TextView addressText;
+    String getaddress;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class Frag_Map extends Fragment {
         }
 
         map = mMapView.getMap();
+
         // Enable Zoom
         map.getUiSettings().setZoomGesturesEnabled(true);
 
@@ -65,6 +67,8 @@ public class Frag_Map extends Fragment {
 
         map.setOnMyLocationChangeListener(myLocationChangeListener());
         // Perform any camera updates here
+
+
         return v;
 
 }
@@ -90,6 +94,11 @@ public class Frag_Map extends Fragment {
 
     public void callBackDataFromAsyncTask(String address) {
         addressText.setText(address);
+        getaddress = address;
+    }
+
+    public String getAddressText(){
+        return getaddress;
     }
     @Override
     public void onResume() {

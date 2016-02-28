@@ -41,17 +41,17 @@ public class Frag_confirm extends Fragment implements View.OnClickListener {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Posting task...");
         progressDialog.show();
-
+        final Intent intent = new Intent(getActivity(), Browse_Activity.class);
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
                         // onLoginFailed();
-                        Intent intent = new Intent(getContext(), Browse_Activity.class);
+
                         startActivity(intent);
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 2000);
     }
 
 

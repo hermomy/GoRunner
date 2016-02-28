@@ -1,5 +1,6 @@
 package lhy.gorunner;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +18,6 @@ public class MyTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_task);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-
-
 
         recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view3);
 
@@ -53,7 +52,8 @@ public class MyTaskActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_home){
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

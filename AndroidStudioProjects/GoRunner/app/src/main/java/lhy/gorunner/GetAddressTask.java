@@ -28,7 +28,7 @@ public class GetAddressTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         Geocoder geocoder;
         List<Address> addresses;
-        geocoder = new Geocoder(activity.getContext(), Locale.getDefault());
+        geocoder = new Geocoder(activity.getActivity(), Locale.getDefault());
 
         try {
             addresses = geocoder.getFromLocation(Double.parseDouble(params[0]), Double.parseDouble(params[1]), 1);
