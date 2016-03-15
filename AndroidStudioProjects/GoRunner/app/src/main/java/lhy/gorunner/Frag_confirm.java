@@ -36,8 +36,7 @@ public class Frag_confirm extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
-                R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Posting task...");
         progressDialog.show();

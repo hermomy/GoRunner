@@ -30,8 +30,7 @@ public class ConfirmOfferActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                final ProgressDialog progressDialog = new ProgressDialog(ConfirmOfferActivity.this,
-                        R.style.AppTheme_Dark_Dialog);
+                final ProgressDialog progressDialog = new ProgressDialog(ConfirmOfferActivity.this);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Verifying account...");
                 progressDialog.show();
@@ -55,7 +54,7 @@ public class ConfirmOfferActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                mMaterialDialog.setTitle("Logout");
+                mMaterialDialog.setTitle("Cancel");
                 mMaterialDialog.setMessage("Are you sure want to cancel offer?");
                 mMaterialDialog.setPositiveButton("YES", new View.OnClickListener() {
                     @Override

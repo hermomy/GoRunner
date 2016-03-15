@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="23dp"
-            android:text="Jessie Tan"
+            android:text="Wei Sian"
             android:textColor="@color/black"/>
     </LinearLayout>
 
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:text="Jess_Tan@gmail.com"
+            android:text="ws0823@gmail.com"
             android:textColor="@color/black"
             />
     </LinearLayout>

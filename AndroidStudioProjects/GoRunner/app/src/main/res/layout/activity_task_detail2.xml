@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    tools:context="lhy.gorunner.TaskDetailActivity">
+
+    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"
+            ></include>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:fillViewport="false"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Social Media Promoting"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/title"
+                    />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:id="@+id/pic_in_task_detail2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Posted by Ben B."
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/time_comment"
+                    android:layout_marginTop="10dp"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/pic_in_task_detail"
+                    android:layout_width="70dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/user_pic"
+                    android:gravity="left"/>
+
+
+                <ImageView
+                    android:id="@+id/pic_in_task_detail3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/pic_in_task_detail"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:src= "@drawable/circle1"
+                    />
+                <TextView
+                    android:id="@+id/pic_in_task_detail4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Open"
+                    android:textSize="12sp"
+
+                    android:textColor="@color/time_comment"
+                    android:layout_toRightOf="@id/pic_in_task_detail3"
+                    android:layout_marginTop="48dp" />
+
+                <ImageView
+                    android:id="@+id/pic_in_task_detail5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/pic_in_task_detail4"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginLeft="15dp"
+                    android:src= "@drawable/circle1"
+                    />
+                <TextView
+                    android:id="@+id/pic_in_task_detail6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assigned"
+                    android:textColor="@color/time_comment"
+                    android:textSize="12sp"
+                    android:layout_toRightOf="@id/pic_in_task_detail5"
+                    android:layout_marginTop="48dp" />
+
+                <ImageView
+                    android:id="@+id/pic_in_task_detail7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/pic_in_task_detail6"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginLeft="15dp"
+                    android:src= "@drawable/circle2"
+                    />
+                <TextView
+                    android:id="@+id/pic_in_task_detail8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Completed"
+                    android:textSize="12sp"
+
+                    android:textColor="@color/time_comment"
+                    android:layout_toRightOf="@id/pic_in_task_detail7"
+                    android:layout_marginTop="48dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="2 hours ago"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
+                    android:textColor="@color/time_comment"
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Paid with GoRunner MyPay"
+                    android:gravity="center"
+                    android:height="30dp"
+                    android:layout_marginTop="10dp"/>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#d3d3d3">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="RM500"
+                        android:gravity="center"
+                        android:height="30dp"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/primary"/>
+
+                </LinearLayout>
+
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/offer_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Release Payment"
+                    android:textSize="15dp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/rounded_corner2"
+                    android:clickable="true" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_marginTop="25dp"
+                android:background="#D3D3D3">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Description"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:gravity="left|center"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:id="@+id/divider">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).\nWe will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week."
+                    android:textSize="15dp"
+                    android:gravity="left|center"
+                    android:layout_marginLeft="10dp"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:layout_below="@id/divider"
+                android:layout_marginTop="10dp"
+                android:background="#D3D3D3">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Task Activity"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:gravity="left|center"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/user_pic"
+                    android:layout_marginLeft="10dp"
+                    app:civ_border_width="0dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_marginTop="10dp"
+                    android:gravity="left"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Alicia D"
+                            android:layout_toRightOf="@+id/profile_image"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="8 hours ago"
+                            android:gravity="right"
+                            android:textColor="@color/time_comment"
+                            android:textSize="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hi, I'd be happy to do this for you."
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/profile_image"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/user_pic"
+                    app:civ_border_width="0dp"
+                    app:civ_border_color="#FF000000"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="left"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Steven Hawking"
+                            android:layout_toRightOf="@+id/profile_image"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textStyle="bold"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="9 hours ago"
+                            android:textSize="10dp"
+                            android:gravity="right"
+                            android:textColor="@color/time_comment"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hi,I would love to help with your logo design and creating your online presence. Have an ABN and registered business so you know i can invoice for all of my works."
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/profile_image"
+                            android:textSize="10dp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:background="#c0c0c0"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

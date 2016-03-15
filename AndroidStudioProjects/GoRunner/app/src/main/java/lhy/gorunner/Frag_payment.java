@@ -25,7 +25,7 @@ public class Frag_payment extends Fragment {
 //    @Override
 //    public void onClick(View v) {
 //        final ProgressDialog progressDialog = new ProgressDialog(getActivity(),
-//                R.style.AppTheme_Dark_Dialog);
+//               );
 //        progressDialog.setIndeterminate(true);
 //        progressDialog.setMessage("Adding payment to myPay...");
 //        progressDialog.show();

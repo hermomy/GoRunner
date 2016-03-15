@@ -53,7 +53,12 @@ public class RecyclerAdapter3 extends RecyclerView.Adapter<RecyclerViewHolder3> 
             int position = vholder.getPosition();
 
             if(button_name[position].equals("VIEW OFFERS")) {
-                Intent i1 = new Intent(context, ViewOfferActivity.class);
+                Intent i1 = new Intent(context, CompareActivity.class);
+                context.startActivity(i1);
+            }
+
+            else {
+                Intent i1 = new Intent(context, TaskDetailActivity2.class);
                 context.startActivity(i1);
             }
         }

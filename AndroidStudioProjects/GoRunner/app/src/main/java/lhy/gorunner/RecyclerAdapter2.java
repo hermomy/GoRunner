@@ -61,6 +61,11 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
                 context.startActivity(i1);
             }
 
+            if(position ==1){
+                Intent i1 = new Intent(context, TaskDetailActivity2.class);
+                context.startActivity(i1);
+            }
+
 
 
 

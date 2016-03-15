@@ -4,6 +4,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,19 +16,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 import me.drakeet.materialdialog.MaterialDialog;
+import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     String NAME = "Hau Yang";
     String EMAIL = "khcy3lha@nottingham.edu.my";
-    int PROFILE = R.drawable.user_pic;
+    int PROFILE = R.drawable.hauyang;
     // Declaring DrawerLayout
     RecyclerView mRecyclerView;                           // Declaring RecyclerView
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
@@ -57,12 +65,19 @@ public class MainActivity extends AppCompatActivity {
 
     ActionBarDrawerToggle mDrawerToggle;                  // Declaring Action Bar Drawer Toggle
 
+    LoginDataBaseAdapter loginDataBaseAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+
+
+        // get Instance  of Database Adapter
+        loginDataBaseAdapter=new LoginDataBaseAdapter(this);
+        loginDataBaseAdapter=loginDataBaseAdapter.open();
 
 
         //Drawer
@@ -157,6 +172,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onDestroy(){
+
+        SQLiteStudioService.instance().stop();
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed(){
         new AlertDialog.Builder(this)
                 .setTitle("Exit App?")
@@ -165,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
+
                         finish();
                     }
                 }).create().show();

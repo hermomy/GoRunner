@@ -42,7 +42,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:id="@+id/image1"
-                android:src="@drawable/user3_pic"
+                android:src="@drawable/hauyang"
                 android:scaleType="centerCrop" />
 
             <TextView

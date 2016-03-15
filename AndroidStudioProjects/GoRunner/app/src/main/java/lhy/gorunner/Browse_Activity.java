@@ -30,7 +30,8 @@ public class Browse_Activity extends AppCompatActivity {
     RecyclerView recyclerView;
     int mutedColor = R.attr.colorPrimary;
     CollapsingToolbarLayout collapsingToolbar;
-ImageView image;
+    ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ ImageView image;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        ImageView header = (ImageView) findViewById(R.id.header);
+            ImageView header = (ImageView) findViewById(R.id.header);
         collapsingToolbar.setContentScrimColor(getResources().getColor(R.color.primary));
 
 //

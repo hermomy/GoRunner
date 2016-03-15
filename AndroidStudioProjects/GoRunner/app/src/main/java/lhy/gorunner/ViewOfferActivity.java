@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -45,7 +46,8 @@ public class ViewOfferActivity extends AppCompatActivity {
         }
 
         if (id == R.id.action_home){
-            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -60,8 +62,7 @@ public class ViewOfferActivity extends AppCompatActivity {
 
         }
         else if (view == findViewById(R.id.made_payment_btn)){
-            final ProgressDialog progressDialog = new ProgressDialog(this,
-                    R.style.AppTheme_Dark_Dialog);
+            final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage("Adding payment to myPay...");
             progressDialog.show();
