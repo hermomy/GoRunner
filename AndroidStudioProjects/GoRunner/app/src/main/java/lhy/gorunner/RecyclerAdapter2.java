@@ -13,18 +13,26 @@ import android.widget.Toast;
  */
 public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
 
-    String[] name = {"Graphic design work", "Social media promoting","Data Entry","Mcdonald's delivery","150 Facebook Likes","Write a resume"};
+    LoginDataBaseAdapter loginDataBaseAdapter;
+
+    String[][]  array;
+
+    String[] name ;
     int[] picture = {R.drawable.user_pic,R.drawable.user3_pic,R.drawable.user2_pic,R.drawable.user_pic,R.drawable.user_pic,R.drawable.user_pic,};
-    String[] pay = {"RM100","RM500","RM300","RM250","RM450","RM150"};
-    String[] time = {"2 hours ago","2 hours ago","2 hours ago","3 hours ago","4 hours ago","4 hours ago"};
-    String[] location = {"Selangor","Kuala Lumpur","Ipoh","Perak","Perak","Johor Bahru"};
-    String[] comment = {"2 Comments, 3 Offers","3 Comments, 0 Offers","1 Comments, 1 Offers","5 Comments, 1 Offers","2 Comments, 0 Offers","0 Comments, 0 Offers"};
+    String[] pay ;
+    String[] time = {"4 hours ago","2 hours ago"};
+    String[] location = {"Perak","Selangor"};
+    String[] comment = {"2 Comments, 0 Offers","0 Comments, 1 Offers"};
     Context context;
     LayoutInflater inflater;
 
     public RecyclerAdapter2(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
+        loginDataBaseAdapter=new LoginDataBaseAdapter(context);
+
+        loginDataBaseAdapter=loginDataBaseAdapter.open();
+
     }
 
     @Override
@@ -32,6 +40,17 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
         View v = inflater.inflate(R.layout.item_list_browse, parent, false);
 
         RecyclerViewHolder2 viewHolder = new RecyclerViewHolder2(v);
+
+        int totalRow = loginDataBaseAdapter.getTotalRow("Task");
+        array = loginDataBaseAdapter.getAllTask();
+        name = new String[totalRow];
+        pay = new String[totalRow];
+
+        for(int n=0;n<totalRow;n++) {
+            name[n] = array[n][0];
+            pay[n] = array[n][3];
+        }
+        // Toast.makeText(context, "array number = " + loginDataBaseAdapter.getTotalRow("Task"), Toast.LENGTH_LONG).show();
         return viewHolder;
     }
 
@@ -67,15 +86,12 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
             }
 
 
-
-
-
         }
     };
 
     @Override
     public int getItemCount() {
 
-        return name.length;
+        return location.length;
     }
 }

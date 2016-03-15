@@ -12,6 +12,8 @@ import android.view.ViewGroup;
  */
 public class RecyclerAdapter3 extends RecyclerView.Adapter<RecyclerViewHolder3> {
 
+
+
     String[] name = {"Graphic design work", "Social media promoting","Mcdonald's delivery","150 Facebook Likes","Write a resume"};
     String[] time = {"2 hours ago","2 hours ago","2 hours ago","3 hours ago","4 hours ago","4 hours ago"};
     String[] button_name = {"VIEW OFFERS","RELEASE","VIEW OFFERS","VIEW OFFERS","RELEASE"};
@@ -30,6 +32,9 @@ public class RecyclerAdapter3 extends RecyclerView.Adapter<RecyclerViewHolder3> 
         View v = inflater.inflate(R.layout.item_list_mytask, parent, false);
 
         RecyclerViewHolder3 viewHolder = new RecyclerViewHolder3(v);
+
+
+
         return viewHolder;
     }
 
