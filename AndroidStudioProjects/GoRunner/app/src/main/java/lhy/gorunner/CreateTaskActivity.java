@@ -72,14 +72,11 @@ public class CreateTaskActivity extends AppCompatActivity {
         if(view == findViewById(R.id.button1)) {
             fr = new Frag_Map();
             img1.setImageResource(R.drawable.step2);
-
-
         }
         else{
 
             fr = new Frag_confirm();
             img2.setImageResource(R.drawable.step3);
-
 
         }
 

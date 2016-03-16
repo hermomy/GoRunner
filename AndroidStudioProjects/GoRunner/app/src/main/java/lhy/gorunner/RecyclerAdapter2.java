@@ -20,9 +20,9 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
     String[] name ;
     int[] picture = {R.drawable.user_pic,R.drawable.user3_pic,R.drawable.user2_pic,R.drawable.user_pic,R.drawable.user_pic,R.drawable.user_pic,};
     String[] pay ;
-    String[] time = {"4 hours ago","2 hours ago"};
-    String[] location = {"Perak","Selangor"};
-    String[] comment = {"2 Comments, 0 Offers","0 Comments, 1 Offers"};
+    String[] time = {"1 hours ago","2 hours ago","3 hours ago","5 hours ago","5 hours ago","6 hours ago"};
+    String[] location = {"Perak","Selangor","Johor","Kajang","Puchong","Selangor"};
+    String[] comment = {"2 Comments, 0 Offers","0 Comments, 1 Offers","2 Comments, 0 Offers","2 Comments, 0 Offers","2 Comments, 0 Offers","2 Comments, 0 Offers"};
     Context context;
     LayoutInflater inflater;
 
@@ -75,15 +75,21 @@ public class RecyclerAdapter2 extends RecyclerView.Adapter<RecyclerViewHolder2>{
             RecyclerViewHolder2 vholder = (RecyclerViewHolder2) v.getTag();
             int position = vholder.getPosition();
 
-            if(position==0){
-                Intent i1 = new Intent(context, TaskDetailActivity.class);
-                context.startActivity(i1);
-            }
+            String temp = array[position][4];
+            Intent i = new Intent(context,TaskDetailActivity.class);
+            i.putExtra("task_id",temp);
+            context.startActivity(i);
 
-            if(position ==1){
-                Intent i1 = new Intent(context, TaskDetailActivity2.class);
-                context.startActivity(i1);
-            }
+//            if(position==0){
+//                Intent i1 = new Intent(context, TaskDetailActivity.class);
+//                context.startActivity(i1);
+//            }
+//
+//            if(position ==1){
+//                Intent i1 = new Intent(context, TaskDetailActivity2.class);
+//                context.startActivity(i1);
+//            }
+
 
 
         }

@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -84,20 +85,20 @@ public class LoginDataBaseAdapter
     }
 
 
-//    public String[][] getRowItems(String task_id){
-//        int n,j;
-//        int totalRow = getTotalRow("Task");
-//        String[][] item = new String[totalRow][5];
-//        Cursor cursor = db.query("Task",null,"task_id=?", new String[]{task_id},null,null,null);
-//
-//        for (n=0;n<totalRow-1;n++){
-//            for (j=0;j<6;j++){
-//                ;
-//            }
-//        }
-//
-//        return item;
-//    }
+    public String[] getRowItems(String task_id){
+    int n;
+    String[] item = new String[4];
+    Cursor cursor = db.rawQuery("SELECT * FROM Task WHERE task_id=" + task_id, null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            item[0] = cursor.getString(cursor.getColumnIndex("taskname"));
+            item[1] = cursor.getString(cursor.getColumnIndex("taskdesc"));
+            item[2] = cursor.getString(cursor.getColumnIndex("price"));
+            item[3] = cursor.getString(cursor.getColumnIndex("status"));
+        }
+
+    return item;
+}
 
     public String[][] getAllTask(){
         int n,j;
@@ -116,6 +117,7 @@ public class LoginDataBaseAdapter
                 array[cPos][1] = c.getString(c.getColumnIndex("category"));
                 array[cPos][2] = c.getString(c.getColumnIndex("date"));
                 array[cPos][3] = c.getString(c.getColumnIndex("price"));
+                array[cPos][4] = c.getString(c.getColumnIndex("task_id")); //get task_id of each task
                 c.moveToNext();
             } while (!c.isAfterLast());
 

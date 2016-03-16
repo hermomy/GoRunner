@@ -36,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
+            android:id="@+id/task_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Graphic design work"
@@ -145,62 +146,144 @@
 
         </RelativeLayout>
 
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:background="@drawable/rounded_corner"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="Paid with GoRunner MyPay"-->
+                <!--android:gravity="center"-->
+                <!--android:height="30dp"-->
+                <!--android:layout_marginTop="10dp"/>-->
+
+
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="#d3d3d3">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/task_price"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="RM100"-->
+                    <!--android:gravity="center"-->
+                    <!--android:height="30dp"-->
+                    <!--android:textSize="30dp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:textColor="@color/primary"/>-->
+
+            <!--</LinearLayout>-->
+
+
+               <!--<android.support.v7.widget.AppCompatButton-->
+                   <!--android:id="@+id/offer_btn"-->
+                   <!--android:layout_width="match_parent"-->
+                   <!--android:layout_height="match_parent"-->
+                   <!--android:text="Make Offer"-->
+                   <!--android:textSize="15dp"-->
+                   <!--android:textColor="#FFFFFF"-->
+                   <!--android:background="@drawable/rounded_corner2"-->
+                   <!--android:clickable="true" />-->
+
+        <!--</LinearLayout>-->
         <LinearLayout
+            android:id="@+id/column_color"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_corner"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/rounded_corner">
 
-            <TextView
+            <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Paid with GoRunner MyPay"
-                android:gravity="center"
-                android:height="30dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="wrap_content"
 
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/lock_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/column_word"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:height="15dp"
+                    android:text="Paid with GoRunner MyPay"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="10dp"
-                android:background="#d3d3d3">
+                android:background="#d3d3d3"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/task_price"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="RM100"
+                    android:layout_marginTop="40dp"
                     android:gravity="center"
-                    android:height="30dp"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary"/>
+                    android:textSize="30dp"/>
 
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/offer_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Make Offer"
+                    android:textSize="15dp"
+                    android:layout_marginTop="25dp"
+                    android:textColor="#FFFFFF"
+                    android:background="#c20000"
+                    android:clickable="true"
+                    android:onClick="nextFrag"/>
             </LinearLayout>
-
-
-               <android.support.v7.widget.AppCompatButton
-                   android:id="@+id/offer_btn"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent"
-                   android:text="Make Offer"
-                   android:textSize="15dp"
-                   android:textColor="#FFFFFF"
-                   android:background="@drawable/rounded_corner2"
-                   android:clickable="true" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            >
+            <TextView
+                android:id="@+id/term"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:layout_marginRight="8dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="26dp"
-            android:layout_marginTop="25dp"
-            android:background="#D3D3D3">
+            android:background="#D3D3D3"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -210,6 +293,7 @@
                 android:textSize="15dp"
                 android:gravity="left|center"
                 android:layout_marginLeft="10dp"
+
                 />
 
         </LinearLayout>
@@ -221,14 +305,13 @@
             android:id="@+id/divider">
 
             <TextView
+                android:id="@+id/task_desc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="I need someone to help me with a company logo, finish off business cards that had wrong details and also design a number of marketing stuff for me, email signatures, letter heads"
-
-                android:textSize="15dp"
-                android:gravity="left|center"
+                android:textSize="14dp"
                 android:layout_marginLeft="10dp"
-                />
+                android:layout_marginRight="5dp" />
 
 
         </LinearLayout>
