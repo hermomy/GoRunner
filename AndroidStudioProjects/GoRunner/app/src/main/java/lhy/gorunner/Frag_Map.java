@@ -35,6 +35,8 @@ public class Frag_Map extends Fragment {
     private TextView locationText;
     private TextView addressText;
     String getaddress;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,6 +90,7 @@ public class Frag_Map extends Fragment {
 
                 //get current address by invoke an AsyncTask object
                 new GetAddressTask(Frag_Map.this).execute(String.valueOf(latitude), String.valueOf(longitude));
+
             }
         };
     }
@@ -98,8 +101,10 @@ public class Frag_Map extends Fragment {
     }
 
     public String getAddressText(){
+
         return getaddress;
     }
+
     @Override
     public void onResume() {
         super.onResume();

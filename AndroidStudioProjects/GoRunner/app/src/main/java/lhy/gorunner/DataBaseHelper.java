@@ -21,11 +21,6 @@ import java.nio.channels.FileChannel;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
 
-    private static final String CREATE_TABLE_Payment = "CREATE TABLE Payment (" +
-            "payment_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-            "amount INTEGER NOT NULL," +
-            "condition INTEGER NOT NULL " +")";
-
     private static final String CREATE_TABLE_Task = "CREATE TABLE  Task (" +
             " task_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
             " taskname  TEXT NOT NULL," +
@@ -33,10 +28,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             " category TEXT," +
             " price INTEGER," +
             " date TEXT," +
+            " location TEXT," +
             " status TEXT," +
             " user_id INTEGER NOT NULL," +
             "FOREIGN KEY( user_id ) REFERENCES user_id" +
             ")";
+
+    private static final String CREATE_TABLE_Payment = "CREATE TABLE Payment (" +
+            "payment_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            "amount INTEGER NOT NULL," +
+            "condition INTEGER NOT NULL " +")";
 
     private static final String CREATE_TABLE_User = "CREATE TABLE  User (" +
             " user_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -49,12 +50,12 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     String INSERT_DATA_USER = "INSERT INTO User(user_name,password,email,phone,location) VALUES ('Hau Yang','8008','khcy3lha@nottingham.edu.my','0167772348','Johor Bahru'),('Min Hua','8078','khcy3lmu@nottingham.edu.my','0167723512','Puchong')";
     String INSERT_DATA_PAYMENT = "INSERT INTO Payment(amount, condition) VALUES ('500','0'),('200','0'),('350',0),('400','0')";
-    String INSERT_DATA_TASK = "INSERT INTO Task(taskname,taskdesc,category,price,status,user_id) VALUES ('Graphic design work','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Home','RM200','OPEN','1')," +
-            "('Social media promoting','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','RM150','ASSIGN','1')," +
-            "('Data Entry','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','RM200','OPEN','1')," +
-            "('Mcdonalds delivery','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','RM200','OPEN','2')," +
-            "('150 Facebook Likes','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Photography','RM300','OPEN','2')," +
-            "('Write a resume','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','RM150','ASSIGN','1');";
+    String INSERT_DATA_TASK = "INSERT INTO Task(taskname,taskdesc,category,price,location,status,user_id) VALUES ('Graphic design work','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Home','RM200','Selangor','OPEN','1')," +
+            "('Social media promoting','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','RM150','Cheras','ASSIGN','1')," +
+            "('Data Entry','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','RM200','Puchong','OPEN','1')," +
+            "('Mcdonalds delivery','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','RM200','Selangor','OPEN','2')," +
+            "('150 Facebook Likes','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Photography','RM300','Johor','OPEN','2')," +
+            "('Write a resume','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','RM150','Johor','ASSIGN','1');";
 
     public DataBaseHelper(Context context, String name,CursorFactory factory, int version)
     {

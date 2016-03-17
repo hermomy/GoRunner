@@ -12,6 +12,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class LoginDataBaseAdapter
 {
@@ -55,12 +58,38 @@ public class LoginDataBaseAdapter
         ContentValues newValues = new ContentValues();
         // Assign values for each row.
         newValues.put("USERNAME", userName);
-        newValues.put("PASSWORD",password);
+        newValues.put("PASSWORD", password);
 
         // Insert the row into your table
         db.insert("Task", null, newValues);
         ///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
     }
+
+    public void insertNewTask(String title,String details,String address,String price){
+
+       ContentValues newValues = new ContentValues();
+        newValues.put("taskname",title);
+        newValues.put("taskdesc",details);
+        newValues.put("price",price);
+        newValues.put("date",getDateTime());
+        newValues.put("location",address);
+        newValues.put("status","OPEN");
+        newValues.put("category","Home");
+        newValues.put("user_id", "1");
+
+        db.insert("Task",null,newValues);
+        Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+//        String sql = "INSERT INTO Task(taskname) VALUES (?)";
+//        db.execSQL(sql, new String[]{title});
+    }
+
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
     public int deleteEntry(String UserName)
     {
         //String id=String.valueOf(ID);
@@ -98,7 +127,8 @@ public class LoginDataBaseAdapter
         }
 
     return item;
-}
+    }
+
 
     public String[][] getAllTask(){
         int n,j;
