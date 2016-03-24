@@ -19,7 +19,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?android:attr/actionBarSize"
+        android:layout_marginTop="60dp"
         android:orientation="vertical"
        >
 
@@ -29,7 +29,8 @@
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -47,13 +48,58 @@
 
             <TextView
                 android:id="@+id/text1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hau Yang"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_toRightOf="@+id/image1"
                 android:layout_marginLeft="10dp"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text1"
+                    android:layout_toRightOf="@id/image1"
+                    android:layout_marginTop="5dp">
+        <ImageView
+            android:id="@+id/star1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:src="@drawable/star2"
+
+            />
+                <ImageView
+                    android:id="@+id/star2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star2"
+                    android:layout_alignParentTop="false"
+                    android:layout_toEndOf="@+id/star1"/>
+                <ImageView
+                    android:id="@+id/star3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star1"
+                    android:layout_alignParentTop="false"
+                    android:layout_toEndOf="@+id/star2"
+                    />
+                <ImageView
+                    android:id="@+id/star4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star1"
+                    android:layout_alignParentTop="false"
+                    android:layout_toEndOf="@+id/star3" />
+                <ImageView
+                    android:id="@+id/star5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star1"
+                    android:layout_alignParentTop="false"
+                    android:layout_toEndOf="@+id/star4"
+                    />
+                </RelativeLayout>
 
                 <ImageView
                     android:id="@+id/img3"
@@ -62,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/ic_work"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="35dp"
                     android:layout_toRightOf="@+id/image1"
                     android:layout_marginLeft="10dp"/>
 
@@ -71,10 +117,10 @@
                     android:layout_below="@id/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="35dp"
                     android:text="Mobile development passionate"
                     android:layout_toRightOf="@+id/img3"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="5dp"/>
 
                 <ImageView
                     android:id="@+id/img2"
@@ -84,17 +130,18 @@
                     android:scaleType="centerCrop"
                     android:src="@mipmap/ic_pin"
                     android:layout_toRightOf="@+id/image1"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="10dp"/>
 
                 <TextView
+                    android:id="@+id/profile_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Johor Bahru, Malaysia"
                     android:layout_below="@id/text3"
                     android:layout_toRightOf="@id/img2"
-                    android:layout_marginTop="10dp"
-
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="5dp"
                     />
 
 
@@ -103,7 +150,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="15dp">
 
 
                     <TextView
@@ -216,13 +263,64 @@
                 android:text="Man growing up in construction industry from childhood. Hard working person with lot of skills.\n\nI am fantastic with people and won't over promise and under deliver on a task. I am reliable and easy to get along, adaptable and can follow instructions accurately.\n\n I have experience in building and construction, landscaping and gardening, marketing, sales and media, telemarketing and computers and entertainment."
                 android:layout_marginTop="10dp"
                 android:gravity="left"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="#c0c0c0"
                 android:layout_marginTop="10dp"/>
 
-            />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VERIFICATION"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="0dp"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/facebook2"
+                    android:layout_marginLeft="80dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/message1"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/iphone2" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/pro2" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#c0c0c0"
+                android:layout_marginTop="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"

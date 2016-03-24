@@ -31,6 +31,7 @@ public class Browse_Activity extends AppCompatActivity {
     int mutedColor = R.attr.colorPrimary;
     CollapsingToolbarLayout collapsingToolbar;
     ImageView image;
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class Browse_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
 
+        user_id = getIntent().getStringExtra("userID");
         int imageview_url = getIntent().getIntExtra("EXTRA_IMAGEVIEW_URL",0);
         image = (ImageView) findViewById(R.id.header);
         if (imageview_url == 0){
@@ -60,7 +62,7 @@ public class Browse_Activity extends AppCompatActivity {
 
         recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view2);
 
-        RecyclerAdapter2 adapter=new RecyclerAdapter2(this);
+        RecyclerAdapter2 adapter=new RecyclerAdapter2(this,user_id);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -111,6 +113,7 @@ public class Browse_Activity extends AppCompatActivity {
 
         if (id == R.id.action_home){
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID",user_id);
             finish();
             startActivity(intent);
 
@@ -187,7 +190,17 @@ public class Browse_Activity extends AppCompatActivity {
             handleMenuSearch();
             return;
         }
+
+        else {
+
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("userID",user_id);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+        }
         super.onBackPressed();
+
     }
 
     private void doSearch() {

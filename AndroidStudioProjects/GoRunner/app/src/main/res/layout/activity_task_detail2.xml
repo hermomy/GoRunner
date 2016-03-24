@@ -36,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/task_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Social Media Promoting"
@@ -57,21 +58,30 @@
                     android:id="@+id/pic_in_task_detail2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Posted by Ben B."
+                    android:text="Posted by "
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/time_comment"
                     android:layout_marginTop="10dp"
                     />
-
+                <TextView
+                    android:id="@+id/task_poster_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Min Hua"
+                    android:textColor="@color/time_comment"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/pic_in_task_detail2"
+                    />
 
                 <ImageView
                     android:id="@+id/pic_in_task_detail"
                     android:layout_width="70dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="35dp"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/user_pic"
                     android:gravity="left"/>
+
 
 
                 <ImageView
@@ -134,6 +144,7 @@
                     android:layout_marginTop="48dp" />
 
                 <TextView
+                    android:id="@+id/task_hour"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="2 hours ago"
@@ -145,57 +156,135 @@
 
             </RelativeLayout>
 
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:background="@drawable/rounded_corner"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="Paid with GoRunner MyPay"-->
+                    <!--android:gravity="center"-->
+                    <!--android:height="30dp"-->
+                    <!--android:layout_marginTop="10dp"/>-->
+
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="100dp"-->
+                    <!--android:layout_marginTop="10dp"-->
+                    <!--android:background="#d3d3d3">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:text="RM500"-->
+                        <!--android:gravity="center"-->
+                        <!--android:height="30dp"-->
+                        <!--android:textSize="30dp"-->
+                        <!--android:textStyle="bold"-->
+                        <!--android:textColor="@color/primary"/>-->
+
+                <!--</LinearLayout>-->
+
+
+                <!--<android.support.v7.widget.AppCompatButton-->
+                    <!--android:id="@+id/offer_btn"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:text="Release Payment"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:background="@drawable/rounded_corner2"-->
+                    <!--android:clickable="true" />-->
+
+            <!--</LinearLayout>-->
+        <LinearLayout
+            android:id="@+id/column_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_corner">
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/lock_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/column_word"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:height="15dp"
+                    android:text="Paid with GoRunner MyPay"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="20dp" />
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/rounded_corner"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:background="#d3d3d3"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/task_price"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Paid with GoRunner MyPay"
+                    android:layout_height="wrap_content"
+                    android:text="RM100"
+                    android:layout_marginTop="40dp"
                     android:gravity="center"
-                    android:height="30dp"
-                    android:layout_marginTop="10dp"/>
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="10dp"
-                    android:background="#d3d3d3">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="RM500"
-                        android:gravity="center"
-                        android:height="30dp"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/primary"/>
-
-                </LinearLayout>
+                    android:textSize="30dp"/>
 
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/offer_btn"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Release Payment"
+                    android:layout_height="wrap_content"
+                    android:text="Make Offer"
                     android:textSize="15dp"
+                    android:layout_marginTop="25dp"
                     android:textColor="#FFFFFF"
-                    android:background="@drawable/rounded_corner2"
-                    android:clickable="true" />
-
+                    android:background="#c20000"
+                    android:clickable="true"
+                    android:onClick="nextFrag"/>
             </LinearLayout>
+</LinearLayout>
 
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                >
+                <TextView
+                    android:id="@+id/term"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:layout_marginRight="8dp" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="26dp"
@@ -221,6 +310,7 @@
                 android:id="@+id/divider">
 
                 <TextView
+                    android:id="@id/task_desc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).\nWe will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week."

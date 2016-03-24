@@ -58,18 +58,27 @@
                 android:id="@+id/pic_in_task_detail2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Posted by Daniel C"
+                android:text="Posted by "
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/time_comment"
                 android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/task_poster_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Min Hua"
+                android:textColor="@color/time_comment"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/pic_in_task_detail2"
                 />
 
 
             <ImageView
                 android:id="@+id/pic_in_task_detail"
                 android:layout_width="70dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/user_pic"
                 android:gravity="left"/>
@@ -135,6 +144,7 @@
                 android:layout_marginTop="48dp" />
 
             <TextView
+                android:id="@+id/task_hour"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="2 hours ago"
@@ -143,59 +153,8 @@
                 android:gravity="right"
                 android:textColor="@color/time_comment"
                 />
-
         </RelativeLayout>
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:background="@drawable/rounded_corner"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:orientation="vertical">-->
-
-            <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="Paid with GoRunner MyPay"-->
-                <!--android:gravity="center"-->
-                <!--android:height="30dp"-->
-                <!--android:layout_marginTop="10dp"/>-->
-
-
-
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="100dp"-->
-                <!--android:layout_marginTop="10dp"-->
-                <!--android:background="#d3d3d3">-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/task_price"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:text="RM100"-->
-                    <!--android:gravity="center"-->
-                    <!--android:height="30dp"-->
-                    <!--android:textSize="30dp"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:textColor="@color/primary"/>-->
-
-            <!--</LinearLayout>-->
-
-
-               <!--<android.support.v7.widget.AppCompatButton-->
-                   <!--android:id="@+id/offer_btn"-->
-                   <!--android:layout_width="match_parent"-->
-                   <!--android:layout_height="match_parent"-->
-                   <!--android:text="Make Offer"-->
-                   <!--android:textSize="15dp"-->
-                   <!--android:textColor="#FFFFFF"-->
-                   <!--android:background="@drawable/rounded_corner2"-->
-                   <!--android:clickable="true" />-->
-
-        <!--</LinearLayout>-->
         <LinearLayout
             android:id="@+id/column_color"
             android:layout_width="match_parent"

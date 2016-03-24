@@ -17,7 +17,8 @@ import butterknife.InjectView;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-
+    String user_id;
+    LoginDataBaseAdapter loginDataBaseAdapter;
     @InjectView(R.id.input_email) EditText _emailText;
     @InjectView(R.id.input_password) EditText _passwordText;
     @InjectView(R.id.btn_login) Button _loginButton;
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
+        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+        loginDataBaseAdapter=loginDataBaseAdapter.open();
 
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -67,10 +70,16 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if(email.equals("lhy@hotmail.com")&& password.equals("0000")){
+        if(loginDataBaseAdapter.Login(email,password)){
+            user_id = loginDataBaseAdapter.getUserID(email);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("userID",user_id);
             startActivity(intent);
         }
+//        if(email.equals("lhy@hotmail.com")&& password.equals("0000")){
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            startActivity(intent);
+//        }
 
         else{
             onLoginFailed();

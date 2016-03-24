@@ -22,9 +22,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     Context context;
     LayoutInflater inflater;
     View v2;
+    String user_id;
 
-    public RecyclerAdapter(Context context) {
+    public RecyclerAdapter(Context context,String user_id) {
         this.context = context;
+        this.user_id = user_id;
         inflater = LayoutInflater.from(context);
     }
 
@@ -57,6 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             if(position <=4 ) {
                 Intent i1 = new Intent(context, Browse_Activity.class);
                 i1.putExtra("EXTRA_IMAGEVIEW_URL", position);
+                i1.putExtra("userID",user_id);
                 context.startActivity(i1);
 
             }

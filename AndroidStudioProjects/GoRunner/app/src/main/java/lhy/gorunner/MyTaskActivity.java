@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 public class MyTaskActivity extends AppCompatActivity {
     RecyclerView recyclerView;
+    String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,9 +20,12 @@ public class MyTaskActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
+        Intent i = getIntent();
+        i.getStringExtra("userID");
+
         recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view3);
 
-        RecyclerAdapter3 adapter=new RecyclerAdapter3(this);
+        RecyclerAdapter3 adapter=new RecyclerAdapter3(this,user_id);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -53,6 +57,7 @@ public class MyTaskActivity extends AppCompatActivity {
 
         if (id == R.id.action_home){
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID",user_id);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

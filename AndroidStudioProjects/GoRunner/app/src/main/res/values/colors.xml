@@ -17,5 +17,6 @@
 
         <color name="tabsScrollColor">#8a140e</color>
         <color name="title">#666666</color>
-    <color name="time_comment">#a6a6a6</color>
+        <color name="time_comment">#a6a6a6</color>
+        <color name="assigned">#E3E3E3</color>
     </resources>

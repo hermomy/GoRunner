@@ -1,15 +1,20 @@
 package lhy.gorunner;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,36 +22,57 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 public class TaskDetailActivity extends AppCompatActivity {
     LoginDataBaseAdapter loginDataBaseAdapter;
-    String[] data = new String[4];
-
+    String[] data = new String[6];
+    String user_id;
+    String price;
+    String taskname;
+    String[] userData = new String[2];
+    String tempID;
+    AlertDialog.Builder alert ;
+    MaterialDialog mMaterialDialog = new MaterialDialog(this);;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        alert= new AlertDialog.Builder(this);
 
-        Intent i = getIntent();
         String task_id = getIntent().getExtras().getString("task_id");
 
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
 
         loginDataBaseAdapter=loginDataBaseAdapter.open();
 
-        String[]data = loginDataBaseAdapter.getRowItems(task_id);
-        String taskname = data[0];
-        String taskdesc = data[1];
-        String price = data[2];
-        String status = data[3];
+        user_id = getIntent().getExtras().getString("userID");
 
+
+
+        data = loginDataBaseAdapter.getRowItems(task_id);
+         taskname = data[0];
+        String taskdesc = data[1];
+         price = data[2];
+        String status = data[3];
+       tempID = data[4];
+        String date = data[5];
+
+        userData = loginDataBaseAdapter.getUserItems(data[4]);
+        String username = userData[0];
+        String picture = userData[1];
+
+        TextView date_time = (TextView) findViewById(R.id.task_hour);
+        TextView user_name = (TextView)findViewById(R.id.task_poster_name);
         TextView title = (TextView)findViewById(R.id.task_name);
         TextView desc = (TextView)findViewById(R.id.task_desc);
         TextView taskprice = (TextView)findViewById(R.id.task_price);
-        TextView info = (TextView)findViewById(R.id.column_word);
+        final TextView info = (TextView)findViewById(R.id.column_word);
         TextView term = (TextView)findViewById(R.id.term);
-        Button offerbutton = (Button)findViewById(R.id.offer_btn);
+        final Button offerbutton = (Button)findViewById(R.id.offer_btn);
+        ImageView user_pic = (ImageView)findViewById(R.id.pic_in_task_detail);
         ImageView img =  (ImageView)findViewById(R.id.pic_in_task_detail5);
         ImageView icon = (ImageView)findViewById(R.id.lock_img);
         LinearLayout layout = (LinearLayout)findViewById(R.id.column_color);
@@ -57,24 +83,34 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         }
         else {
-            layout.setBackgroundResource(R.drawable.rounded_cornergreen);
             img.setImageResource(R.drawable.circle1);
-            offerbutton.setText("RELEASE PAYMENT");
-            icon.setImageResource(R.drawable.lock);
-            info.setText("Payment Secured");
-            term.setText("* You must wait for the Runner to complete the task and request payment on completion in order to release the payment into their verified bank.");
+            offerbutton.setText("Assigned");
+            offerbutton.setBackgroundColor(Color.parseColor("#dbdbdb"));
+            info.setText("Paid with MyPay");
+            term.setText("");
 
         }
 
         title.setText(taskname);
         desc.setText(taskdesc);
-        taskprice.setText(price);
+        taskprice.setText("RM " + price);
+        user_name.setText(username);
+        date_time.setText(date);
+        int id = this.getResources().getIdentifier(picture, "drawable", getPackageName());
+        user_pic.setImageResource(id);
 
         findViewById(R.id.offer_btn).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MakeOfferActivity.class);
-                startActivity(intent);
+                if(offerbutton.getText().equals("Make Offer")) {
 
+                    Intent intent = new Intent(getApplicationContext(), MakeOfferActivity.class);
+
+                    intent.putExtra("title",taskname);
+                    intent.putExtra("price",price);
+                    intent.putExtra("userID", user_id);
+                    intent.putExtra("task_user_id",tempID);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -102,6 +138,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         if(id == R.id.action_home){
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("userID",user_id);
             startActivity(intent);
         }
 

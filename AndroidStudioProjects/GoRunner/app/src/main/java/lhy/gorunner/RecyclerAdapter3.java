@@ -13,17 +13,18 @@ import android.view.ViewGroup;
 public class RecyclerAdapter3 extends RecyclerView.Adapter<RecyclerViewHolder3> {
 
 
-
-    String[] name = {"Graphic design work", "Social media promoting","Mcdonald's delivery","150 Facebook Likes","Write a resume"};
-    String[] time = {"2 hours ago","2 hours ago","2 hours ago","3 hours ago","4 hours ago","4 hours ago"};
-    String[] button_name = {"VIEW OFFERS","RELEASE","VIEW OFFERS","VIEW OFFERS","RELEASE"};
-    String[] location = {"Selangor","Kuala Lumpur","Ipoh","Perak","Perak","Johor Bahru"};
+String user_id;
+    String[] name = {"Graphic design work", "Social media promoting","150 Facebook Likes",};
+    String[] time = {"2 hours ago","2 hours ago","2 hours ago","3 hours ago"};
+    String[] button_name = {"VIEW OFFERS","RELEASE","REQUEST"};
+    String[] location = {"Selangor","Kuala Lumpur","Ipoh","Perak"};
     //String[] comment = {"2 Comments, 3 Offers","3 Comments, 0 Offers","1 Comments, 1 Offers","5 Comments, 1 Offers","2 Comments, 0 Offers","0 Comments, 0 Offers"};
     Context context;
     LayoutInflater inflater;
 
-    public RecyclerAdapter3(Context context) {
+    public RecyclerAdapter3(Context context,String user_id) {
         this.context = context;
+        this.user_id = user_id;
         inflater = LayoutInflater.from(context);
     }
 
@@ -44,7 +45,7 @@ public class RecyclerAdapter3 extends RecyclerView.Adapter<RecyclerViewHolder3> 
 
         holder.tv1.setText(name[position]);
         holder.tv2.setText(location[position]);
-       // holder.tv3.setText(comment[position]);
+        holder.tv3.setText(time[position]);
         holder.btn1.setText(button_name[position]);
         holder.btn1.setOnClickListener(clickListener);
         holder.btn1.setTag(holder);
@@ -59,11 +60,23 @@ public class RecyclerAdapter3 extends RecyclerView.Adapter<RecyclerViewHolder3> 
 
             if(button_name[position].equals("VIEW OFFERS")) {
                 Intent i1 = new Intent(context, CompareActivity.class);
+                i1.putExtra("userID",user_id);
+                context.startActivity(i1);
+            }
+
+            else if (button_name[position].equals("RELEASE")) {
+                Intent i1 = new Intent(context, TaskDetailActivity2.class);
+                i1.putExtra("task_id","2");
+                i1.putExtra("value",name[position]);
+                i1.putExtra("btn_name","RELEASE");
                 context.startActivity(i1);
             }
 
             else {
                 Intent i1 = new Intent(context, TaskDetailActivity2.class);
+                i1.putExtra("task_id","2");
+                i1.putExtra("value",name[position]);
+                i1.putExtra("btn_name","REQUEST");
                 context.startActivity(i1);
             }
         }

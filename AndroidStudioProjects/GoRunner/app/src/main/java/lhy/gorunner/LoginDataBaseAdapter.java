@@ -53,19 +53,36 @@ public class LoginDataBaseAdapter
         return db;
     }
 
-    public void insertEntry(String userName,String password)
+    public boolean Login(String email, String password) throws SQLException
     {
-        ContentValues newValues = new ContentValues();
-        // Assign values for each row.
-        newValues.put("USERNAME", userName);
-        newValues.put("PASSWORD", password);
-
-        // Insert the row into your table
-        db.insert("Task", null, newValues);
-        ///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+        Cursor mCursor = db.rawQuery("SELECT * FROM user WHERE email=? AND password=?", new String[]{email,password});
+        if (mCursor != null) {
+            if(mCursor.getCount() > 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void insertNewTask(String title,String details,String address,String price){
+
+    public void createAccount(String username,String password,String email){
+
+        ContentValues newValues = new ContentValues();
+        newValues.put("user_name",username);
+        newValues.put("password",password);
+        newValues.put("email",email);
+        newValues.put("phone","");
+        newValues.put("location","");
+        newValues.put("picture","user_pic");
+        newValues.put("DOR", getDateTime());
+
+        db.insert("User", null, newValues);
+        Toast.makeText(context, "Your account has been created successfully", Toast.LENGTH_LONG).show();
+
+    }
+
+    public void insertNewTask(String title,String details,String address,String price,String user_id){
 
        ContentValues newValues = new ContentValues();
         newValues.put("taskname",title);
@@ -75,14 +92,26 @@ public class LoginDataBaseAdapter
         newValues.put("location",address);
         newValues.put("status","OPEN");
         newValues.put("category","Home");
-        newValues.put("user_id", "1");
+        newValues.put("user_id", user_id);
 
-        db.insert("Task",null,newValues);
-        Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
-//        String sql = "INSERT INTO Task(taskname) VALUES (?)";
-//        db.execSQL(sql, new String[]{title});
+        db.insert("Task", null, newValues);
+        //Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+
     }
 
+    public void insertNewOffer(String user_id,String task_user_id,String comment){
+
+        ContentValues newValues = new ContentValues();
+        newValues.put("user_id",user_id);
+        newValues.put("task_user_id",task_user_id);
+        newValues.put("offer_date",getDateTime());
+        newValues.put("offer_comment",comment);
+
+
+        db.insert("Offer", null, newValues);
+        Toast.makeText(context, "Offer inserted to database", Toast.LENGTH_LONG).show();
+
+    }
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd", Locale.getDefault());
@@ -90,33 +119,11 @@ public class LoginDataBaseAdapter
         return dateFormat.format(date);
     }
 
-    public int deleteEntry(String UserName)
-    {
-        //String id=String.valueOf(ID);
-        String where="USERNAME=?";
-        int numberOFEntriesDeleted= db.delete("Task", where, new String[]{UserName}) ;
-        // Toast.makeText(context, "Number fo Entry Deleted Successfully : "+numberOFEntriesDeleted, Toast.LENGTH_LONG).show();
-        return numberOFEntriesDeleted;
-    }
-
-    public String getSinlgeEntry(String userName)
-    {
-        Cursor cursor=db.query("Task", null, " USERNAME=?", new String[]{userName}, null, null, null);
-        if(cursor.getCount()<1) // UserName Not Exist
-        {
-            cursor.close();
-            return "NOT EXIST";
-        }
-        cursor.moveToFirst();
-        String password= cursor.getString(cursor.getColumnIndex("PASSWORD"));
-        cursor.close();
-        return password;
-    }
 
 
     public String[] getRowItems(String task_id){
     int n;
-    String[] item = new String[4];
+    String[] item = new String[6];
     Cursor cursor = db.rawQuery("SELECT * FROM Task WHERE task_id=" + task_id, null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
@@ -124,11 +131,73 @@ public class LoginDataBaseAdapter
             item[1] = cursor.getString(cursor.getColumnIndex("taskdesc"));
             item[2] = cursor.getString(cursor.getColumnIndex("price"));
             item[3] = cursor.getString(cursor.getColumnIndex("status"));
+            item[4] = cursor.getString(cursor.getColumnIndex("user_id"));
+            item[5] = cursor.getString(cursor.getColumnIndex("date"));
         }
 
     return item;
     }
+    public String[] getRowItemsbyTitle(String taskname){
+        int n;
+        String[] item = new String[6];
+        Cursor cursor = db.rawQuery("SELECT * FROM Task WHERE taskname= '" + taskname + "'", null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            item[0] = cursor.getString(cursor.getColumnIndex("taskdesc"));
+            item[1] = cursor.getString(cursor.getColumnIndex("price"));
+            item[2] = cursor.getString(cursor.getColumnIndex("user_id"));
+            item[3] = cursor.getString(cursor.getColumnIndex("date"));
+        }
 
+        return item;
+    }
+
+
+
+    public String getUserPic(String user_id){
+
+        String item= null;
+        Cursor cursor = db.rawQuery("SELECT * FROM User WHERE user_id=" + user_id, null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            item = cursor.getString(cursor.getColumnIndex("picture"));
+
+        }
+
+        return item;
+    }
+
+    public String getUserID(String email){
+
+        String item= null;
+        Cursor cursor = db.rawQuery("SELECT * FROM User WHERE email='" + email + "'", null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            item = cursor.getString(cursor.getColumnIndex("user_id"));
+
+        }
+
+        return item;
+    }
+    public String[] getUserItems(String user_id){
+
+        String[] item= new String[8];
+        Cursor cursor = db.rawQuery("SELECT * FROM User WHERE user_id='" + user_id + "'", null);
+        if(cursor.getCount()>0) {
+            cursor.moveToFirst();
+            item[0] = cursor.getString(cursor.getColumnIndex("user_name"));
+            item[1] = cursor.getString(cursor.getColumnIndex("picture"));
+            item[2] = cursor.getString(cursor.getColumnIndex("email"));
+            item[3] = cursor.getString(cursor.getColumnIndex("location"));
+            item[4] = cursor.getString(cursor.getColumnIndex("expertise"));
+            item[5] = cursor.getString(cursor.getColumnIndex("posted"));
+            item[6] = cursor.getString(cursor.getColumnIndex("completed"));
+            item[7] = cursor.getString(cursor.getColumnIndex("review"));
+
+        }
+
+        return item;
+    }
 
     public String[][] getAllTask(){
         int n,j;
@@ -137,7 +206,7 @@ public class LoginDataBaseAdapter
 
         Cursor c = db.rawQuery("SELECT * FROM Task",null);
         int cPos = 0; // for cursor position
-        String[][] array = new String[c.getCount()][5]; // Dynamic string array
+        String[][] array = new String[c.getCount()][8]; // Dynamic string array
 
         if (c.getCount() > 0) { // If cursor has atleast one row
             c.moveToFirst();
@@ -148,6 +217,9 @@ public class LoginDataBaseAdapter
                 array[cPos][2] = c.getString(c.getColumnIndex("date"));
                 array[cPos][3] = c.getString(c.getColumnIndex("price"));
                 array[cPos][4] = c.getString(c.getColumnIndex("task_id")); //get task_id of each task
+                array[cPos][5] = c.getString(c.getColumnIndex("location"));
+                array[cPos][6] = c.getString(c.getColumnIndex("user_id"));
+                array[cPos][7] = c.getString(c.getColumnIndex("status"));
                 c.moveToNext();
             } while (!c.isAfterLast());
 
@@ -156,18 +228,6 @@ public class LoginDataBaseAdapter
             Log.e("SQL Query Error", "Cursor has no data");
         }
         return array;
-    }
-
-    public void  updateEntry(String userName,String password)
-    {
-        // Define the updated row content.
-        ContentValues updatedValues = new ContentValues();
-        // Assign values for each row.
-        updatedValues.put("USERNAME", userName);
-        updatedValues.put("PASSWORD",password);
-
-        String where="USERNAME = ?";
-        db.update("Task",updatedValues, where, new String[]{userName});
     }
 
     public int getTotalRow(String tablename){

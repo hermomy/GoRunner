@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;
-
+    String[]temp;
 
     RecyclerView recyclerView;
 
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
     LoginDataBaseAdapter loginDataBaseAdapter;
 
+    String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +80,20 @@ public class MainActivity extends AppCompatActivity {
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
         loginDataBaseAdapter=loginDataBaseAdapter.open();
 
+        temp = new String[3];
+
+//        Intent i = getIntent();
+//        user_id = i.getStringExtra("userID");
+
+        user_id = "1";
+        //Toast.makeText(this, "user_id = " + user_id, Toast.LENGTH_LONG).show();
+
+        temp = loginDataBaseAdapter.getUserItems(user_id);
+
+        NAME = temp[0];
+        EMAIL = temp[2];
+        int id = getResources().getIdentifier(temp[1], "drawable",getPackageName());
+        PROFILE = id;
         //Drawer
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
 
@@ -159,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        RecyclerAdapter adapter=new RecyclerAdapter(this);
+        RecyclerAdapter adapter=new RecyclerAdapter(this,user_id);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -217,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_create){
             Intent intent = new Intent(getApplicationContext(), CreateTaskActivity.class);
+            intent.putExtra("userID",user_id);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -228,12 +244,14 @@ public class MainActivity extends AppCompatActivity {
 
         if (position == 2 ){
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            intent.putExtra("userID",user_id);
             startActivity(intent);
 
         }
 
         if (position == 3 ){
             Intent intent = new Intent (MainActivity.this,MyTaskActivity.class);
+            intent.putExtra("userID",user_id);
             startActivity(intent);
         }
 
@@ -262,5 +280,9 @@ public class MainActivity extends AppCompatActivity {
             mMaterialDialog.show();
 
         }
+    }
+
+    public String getUserID(String user_id){
+        return user_id;
     }
 }

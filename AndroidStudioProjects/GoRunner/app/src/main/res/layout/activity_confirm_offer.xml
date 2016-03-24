@@ -38,7 +38,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
 
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
+                android:id="@+id/profile_image1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/hauyang"
@@ -56,7 +56,7 @@
                 <de.hdodenhof.circleimageview.CircleImageView
 
                     xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
+                    android:id="@+id/profile_image2"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/user3_pic"
@@ -97,6 +97,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/confirm_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="RM100"
@@ -128,6 +129,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
             <TextView
+                android:id="@+id/confirm_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Graphic design work"
@@ -137,6 +139,7 @@
                 />
 
                 <TextView
+                    android:id="@+id/confirm_receive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="RM85"

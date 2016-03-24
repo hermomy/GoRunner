@@ -45,17 +45,38 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             " password INTEGER NOT NULL," +
             " email TEXT," +
             " phone TEXT," +
-            " location TEXT" +
+            " location TEXT," +
+            " picture TEXT," +
+            " expertise TEXT," +
+            " posted TEXT," +
+            " completed TEXT," +
+            " review TEXT," +
+            " DOR TEXT" +
             ")";
 
-    String INSERT_DATA_USER = "INSERT INTO User(user_name,password,email,phone,location) VALUES ('Hau Yang','8008','khcy3lha@nottingham.edu.my','0167772348','Johor Bahru'),('Min Hua','8078','khcy3lmu@nottingham.edu.my','0167723512','Puchong')";
+    private static final String CREATE_TABLE_Offer = "CREATE TABLE  Offer (" +
+            " offer_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            " user_id INTEGER NOT NULL," +
+            " task_user_id INTEGER NOT NULL," +
+            " offer_date TEXT,"+
+            " offer_comment TEXT" +
+            ")";
+
+    String INSERT_DATA_USER = "INSERT INTO User(user_name,password,email,phone,location,picture,expertise,posted,completed,review,DOR) VALUES ('Hau Yang','8008','lhy@gmail.com','0167772348','Johor Bahru','hauyang','Mobile development passionate','4','5','2','22/10/2013')," +
+            "('Min Hua','1234','meow@gmail.com','0167723512','Puchong','meow','Graphic designer','3','2','0','2/8/2014')," +
+            "('Eric Tiew','1234','khcy3eric@nottingham.edu.my','0167743533','Cheras','eric','PHP expert','3','5','2','12/5/2013')," +
+            "('Wei Jie','1234','khcy3wjie@nottingham.edu.my','0161123512','Batu Pahat','weijie','Cleaner','1','2','2','25/1/2013')," +
+            "('Ann Pei','8078','khcy3annpei@nottingham.edu.my','0117723512','Batu Pahat','annpei','Educator','2','6','2','25/12/2012')," +
+            "('Wei Sian','8078','khcy3wsian@nottingham.edu.my','0132523512','Semenyih','weisian','Graphic designer','5','4','2','2/10/2012');";
+
     String INSERT_DATA_PAYMENT = "INSERT INTO Payment(amount, condition) VALUES ('500','0'),('200','0'),('350',0),('400','0')";
-    String INSERT_DATA_TASK = "INSERT INTO Task(taskname,taskdesc,category,price,location,status,user_id) VALUES ('Graphic design work','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Home','RM200','Selangor','OPEN','1')," +
-            "('Social media promoting','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','RM150','Cheras','ASSIGN','1')," +
-            "('Data Entry','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','RM200','Puchong','OPEN','1')," +
-            "('Mcdonalds delivery','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','RM200','Selangor','OPEN','2')," +
-            "('150 Facebook Likes','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Photography','RM300','Johor','OPEN','2')," +
-            "('Write a resume','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','RM150','Johor','ASSIGN','1');";
+
+    String INSERT_DATA_TASK = "INSERT INTO Task(taskname,taskdesc,category,price,date,location,status,user_id) VALUES ('Graphic design work','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Home','200','2016-03-17','Selangor','OPEN','6')," +
+            "('Social media promoting','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','150','2016-03-18','Cheras','ASSIGN','2')," +
+            "('Data Entry','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','200','2016-03-18','Puchong','OPEN','3')," +
+            "('Mcdonalds delivery','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','200','2016-03-18','Selangor','OPEN','4')," +
+            "('150 Facebook Likes','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Photography','300','2016-03-18','Johor','OPEN','3')," +
+            "('Write a resume','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','150','2016-03-18','Johor','ASSIGN','5');";
 
     public DataBaseHelper(Context context, String name,CursorFactory factory, int version)
     {
@@ -70,6 +91,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         _db.execSQL(CREATE_TABLE_Payment);
         _db.execSQL(CREATE_TABLE_Task);
         _db.execSQL(CREATE_TABLE_User);
+        _db.execSQL(CREATE_TABLE_Offer);
         _db.execSQL(INSERT_DATA_USER);
         _db.execSQL(INSERT_DATA_TASK);
         _db.execSQL(INSERT_DATA_PAYMENT);

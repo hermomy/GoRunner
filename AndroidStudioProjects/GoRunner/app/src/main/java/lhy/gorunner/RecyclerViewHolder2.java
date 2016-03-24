@@ -21,6 +21,7 @@ public class RecyclerViewHolder2 extends RecyclerView.ViewHolder {
         tv3 = (TextView) itemView.findViewById(R.id.list_time);
         tv4 = (TextView) itemView.findViewById((R.id.location_browse));
         tv5 = (TextView) itemView.findViewById((R.id.comment_browse));
+
         imageView = (ImageView) itemView.findViewById(R.id.list_avatar_browse);
 
     }

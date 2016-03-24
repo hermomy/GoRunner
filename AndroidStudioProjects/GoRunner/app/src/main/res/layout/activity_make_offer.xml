@@ -29,6 +29,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/make_offer_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Task Title: Graphic Design Work "
@@ -39,6 +40,7 @@
 
 
             <TextView
+                android:id="@+id/make_offer_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="RM100"
@@ -50,6 +52,7 @@
                 />
 
             <TextView
+                android:id="@+id/make_offer_receive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="You'll receive: RM95"
@@ -82,6 +85,7 @@
 
 
             <EditText
+                android:id="@+id/make_offer_comment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginLeft="10dp"

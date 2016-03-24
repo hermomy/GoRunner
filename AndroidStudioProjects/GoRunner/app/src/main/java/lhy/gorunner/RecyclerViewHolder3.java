@@ -19,7 +19,7 @@ public class RecyclerViewHolder3 extends RecyclerView.ViewHolder {
 
         tv1 = (TextView) itemView.findViewById(R.id.title_mytask);
         tv2 = (TextView) itemView.findViewById(R.id.location_mytask);
-       // tv3 = (TextView) itemView.findViewById(R.id.comment_mytask);
+        tv3 = (TextView) itemView.findViewById(R.id.date_mytask);
         btn1 = (Button) itemView.findViewById(R.id.mytask_button);
 
 

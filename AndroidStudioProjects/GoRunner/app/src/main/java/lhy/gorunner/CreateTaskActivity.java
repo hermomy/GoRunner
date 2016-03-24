@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -29,7 +30,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     @InjectView(R.id.button3) Button _PostTask;
     public String title,details,address,price;
     LoginDataBaseAdapter loginDataBaseAdapter;
-
+    String user_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,9 @@ public class CreateTaskActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter=loginDataBaseAdapter.open();
-
-
+        Intent i = getIntent();
+        user_id = i.getStringExtra("userID");
+     //   Toast.makeText(this, "User ID = " + user_id, Toast.LENGTH_LONG).show();
     }
 
 
@@ -68,6 +70,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         if (id == R.id.action_home){
             Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("userID",user_id);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
@@ -77,7 +80,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         TextView getBudget;
         getBudget = (TextView)findViewById(R.id.fragment_create).findViewById(R.id.budget);
         price = getBudget.getText().toString();
-        loginDataBaseAdapter.insertNewTask(title,details,address,price);
+        loginDataBaseAdapter.insertNewTask(title,details,address,price,user_id);
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setIndeterminate(true);
             progressDialog.setMessage("Posting task...");
@@ -88,7 +91,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                         public void run() {
                             // On complete call either onLoginSuccess or onLoginFailed
                             // onLoginFailed();
-
+                            intent.putExtra("userID",user_id);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             progressDialog.dismiss();
                         }
@@ -130,6 +134,8 @@ public class CreateTaskActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+
 
 
 
