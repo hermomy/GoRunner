@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class Review_Activity extends AppCompatActivity {
@@ -25,12 +28,14 @@ public class Review_Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.review);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         Intent i = getIntent();
 
-        user_id = i.getStringExtra("userID");
-        task_name = i.getStringExtra("taskname");
+        // user_id = i.getStringExtra("userID");
+        user_id = "1";
+        //task_name = i.getStringExtra("taskname");
+        task_name = "Graphic design work";
         // get Instance  of Database Adapter
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
@@ -55,108 +60,86 @@ public class Review_Activity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             String sentence = content.getText().toString();
-            String file = "EmotionLookupTable.txt";
-
-            Scanner EmotionWord = null;
 
             int score = 0;
-            try {
-                EmotionWord = new Scanner(new File(file));
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            String[] splitted_word = sentence.split(" ");
-//            for ( String ss : splitted_word) {
-//
-//                System.out.println(ss);
-//            }
-
-            int length = splitted_word.length;
-            String compare, extra;
 
             try {
-                score = checkBoosterWord(splitted_word);
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+                String[] splitted_word = sentence.split(" ");
 
-            for (int n = 0; n < length; n++) {
-                while (EmotionWord.hasNext()) {
-                    compare = EmotionWord.next();
+                int length = splitted_word.length;
+                String compare, extra;
 
-                    if (splitted_word[n].equals(compare)) {
-                        char[] temp = EmotionWord.next().toCharArray();
-                        if (temp[0] == '+') {
-                            score = score + Character.getNumericValue(temp[1]);
-                        } else {
-                            score = score - Character.getNumericValue(temp[1]);
-                        }
-                        break;
-                    }
+                for (int n = 0; n < length; n++) {
+
+                    score  =  score + (getBoosterScore(splitted_word[n]));
+
+                }
+
+                for (int n = 0; n < length; n++) {
+
+                    score = score + (getEmotionScore(splitted_word[n]));
+                    Log.e("Score: ", String.valueOf(score));
+
                 }
 
 
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-
         }
+
     };
 
-    public int checkBoosterWord(String[] splitted_word) throws FileNotFoundException {
+    public int getEmotionScore(String word) throws IOException {
 
-        String file = "BoosterWordList.txt";
-        Scanner BoosterWord = new Scanner(new File(file));
+        String file = "EmotionLookupTable.txt";
+        InputStream myFile = getResources().getAssets().open(file);
+        Scanner EmotionWord = new Scanner(myFile);
         String compare;
         int score = 0;
 
-        for (int n = 0; n < splitted_word.length; n++) {
-            while (BoosterWord.hasNext()) {
+            while (EmotionWord.hasNextLine()) {
+                compare = EmotionWord.next();
 
-                compare = BoosterWord.next();
-
-                if (splitted_word[n].equals(compare)) {
-                    char[] temp = BoosterWord.next().toCharArray();
-                    if (temp[0] == '+') {
-                        score = score + Character.getNumericValue(temp[1]);
+                if (word.equals(compare)) {
+                    char[] temp =  EmotionWord.next().toCharArray();
+                    if (temp.length == 1) {
+                        score = score + Character.getNumericValue(temp[0]);
                     } else {
                         score = score - Character.getNumericValue(temp[1]);
                     }
-                    break;
-                }
-            }
 
+                }
+                EmotionWord.nextLine();
+            }
+        return score;
+    }
+
+    public int getBoosterScore(String word) throws IOException {
+        String compare;
+        String file = "BoosterWordList.txt";
+        InputStream myFile = getResources().getAssets().open(file);
+        int score=0;
+        Scanner BoosterWord = new Scanner(myFile);
+        while (BoosterWord.hasNextLine()) {
+
+            compare = BoosterWord.next();
+
+            if (word.equals(compare)) {
+                char[] temp = BoosterWord.next().toCharArray();
+                if (temp.length == 1) {
+                    score = score + Character.getNumericValue(temp[0]);
+                } else {
+                    score = score - Character.getNumericValue(temp[1]);
+                }
+
+            }
+            BoosterWord.nextLine();
         }
         return score;
     }
 
-//    public String[] remainBoosterWord(String[] splitted_word) throws FileNotFoundException {
-//
-//        String file = "BoosterWordList.txt";
-//        Scanner BoosterWord = new Scanner(new File(file));
-//        String compare;
-//        int score = 0;
-//        String[] remain = new String[splitted_word.length];
-//
-//        for (int n = 0; n < splitted_word.length; n++) {
-//            while (BoosterWord.hasNext()) {
-//
-//                compare = BoosterWord.next();
-//
-//                if (splitted_word[n].equals(compare)) {
-//                    char[] temp = BoosterWord.next().toCharArray();
-//                    if (temp[0] == '+') {
-//                        score = score + Character.getNumericValue(temp[1]);
-//                    } else {
-//                        score = score - Character.getNumericValue(temp[1]);
-//                    }
-//                    break;
-//                }
-//            }
-//            remain[n] = splitted_word[n];
-//        }
-//        return remain;
-//    }
 }
