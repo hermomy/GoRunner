@@ -72,43 +72,47 @@ public class Review_Activity extends AppCompatActivity {
 
                 String[] splitted_word = sentence.split(" ");
 
-                Set<String> same_occurrence = checkSameOccurrence(splitted_word);
-
-                for (String s : same_occurrence)
-
-                    Log.e("same occurence: ", s);
-
-                int length = splitted_word.length;
-
-                    for (int n = 0; n < length; n++) {
-
-                        score = score + (getEmotionScore(splitted_word[n]));
-
-                    }
-
-                     if (same_occurrence.isEmpty()) {         //if no same occurrence then it will read through the whole sentence
-
-                         for (int n = 0; n < length; n++) {
-
-                             score = score + (getBoosterScore(splitted_word[n]));
-
-                         }
-                     }
-
-                else {                                       //if more than one same occurrence then it will send the same_occurrence array to getExtraScore to obtain the extra score
-
-                            score = score + getExtraScore(same_occurrence) ;
-
-                     }
-
-                    for (int n = 0; n < length; n++) {
-
-                        score = score + (getEmojiScore(splitted_word[n]));
-
-                    }
+               // Set<String> same_occurrence = checkSameOccurrence(splitted_word);
+                List<String> generalized = generalizedSentence(splitted_word);
 
 
-                Log.e("Score: ", String.valueOf(score));
+                for (String s: generalized){
+                    score = score + getEmotionScore(s);
+                }
+
+                 score = score + getTotalBoosterScore(generalized);
+
+
+                    Log.e("score: ", String.valueOf(score));
+
+//                    for (int n = 0; n < length; n++) {
+//
+//                        score = score + (getEmotionScore(splitted_word[n]));
+//
+//                    }
+//
+//                     if (same_occurrence.isEmpty()) {         //if no same occurrence then it will read through the whole sentence
+//
+//                         for (int n = 0; n < length; n++) {
+//
+//                             score = score + (getBoosterScore(splitted_word[n]));
+//
+//                         }
+//                     }
+//
+//                else {                                       //if more than one same occurrence then it will send the same_occurrence array to getExtraScore to obtain the extra score
+//
+//                            score = score + getExtraScore(same_occurrence) ;
+//
+//                     }
+//
+//                    for (int n = 0; n < length; n++) {
+//
+//                        score = score + (getEmojiScore(splitted_word[n]));
+//
+//                    }
+
+// Log.e("Score: ", String.valueOf(score));
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -118,6 +122,165 @@ public class Review_Activity extends AppCompatActivity {
         }
 
     };
+
+    public List<String> generalizedSentence(String[] splitted_word) throws IOException {
+        List<String> generalizedArray = new ArrayList<String>();
+
+        for (int n = 0; n < splitted_word.length; n++) {
+            String word = splitted_word[n];
+            if (checkEmotion(word) || checkBooster(word) || checkEmoji(word)) {
+                generalizedArray.add(splitted_word[n]);
+            }
+        }
+
+        return generalizedArray;
+    }
+
+    public Boolean checkEmotion(String word) throws IOException {
+        String file = "EmotionLookupTable.txt";
+        InputStream myFile = getResources().getAssets().open(file);
+        Scanner EmotionWord = new Scanner(myFile);
+        String compare;
+        Boolean check = false;
+
+        while (EmotionWord.hasNextLine()) {
+            compare = EmotionWord.next();
+
+            if (word.equals(compare)) {
+            check = true;
+            }
+            EmotionWord.nextLine();
+        }
+        return check;
+    }
+
+    public Boolean checkBooster(String word) throws IOException {
+        String file = "BoosterWordList.txt";
+        InputStream myFile = getResources().getAssets().open(file);
+        Scanner BoosterWord = new Scanner(myFile);
+        String compare;
+        Boolean check = false;
+
+        while (BoosterWord.hasNextLine()) {
+            compare = BoosterWord.next();
+
+            if (word.equals(compare)) {
+                check = true;
+            }
+            BoosterWord.nextLine();
+        }
+        return check;
+    }
+
+    public Boolean checkEmoji(String word) throws IOException {
+        String file = "EmojiLookupTable.txt";
+        InputStream myFile = getResources().getAssets().open(file);
+        Scanner Emoji = new Scanner(myFile);
+        String compare;
+        Boolean check = false;
+
+        while (Emoji.hasNextLine()) {
+            compare = Emoji.next();
+
+            if (word.equals(compare)) {
+                check = true;
+            }
+            Emoji.nextLine();
+        }
+        return check;
+    }
+
+    public List<Character> getSign(List<String> generalized) throws IOException {
+        List <Character> sign = new ArrayList<Character>();
+
+        for (int n=0;n<generalized.size();n++){
+
+           if( checkBooster(generalized.get(n))){
+
+              for(int j=1;j<=generalized.size()-1;j++) {
+
+                  if(checkEmotion(generalized.get(n+1))){
+
+                      sign.add(getEmotionSignValue(generalized.get(n + 1)));
+
+                   }
+
+
+               }
+           }
+        }
+        for(Character s : sign)
+            Log.e("Sign Array: ", s.toString());
+        return sign;
+    }
+
+    public int getTotalBoosterScore(List<String> generalized) throws IOException {
+        List <String> BoosterArray = new ArrayList<String>();
+        List <Integer> ScoreArray = new ArrayList<Integer>();
+        List <Character> SignArray = new ArrayList<Character>();
+        List <String> CombinedArray = new ArrayList<String>();
+        int score = 0 ;
+        for(int n=0;n<generalized.size();n++){
+            if(checkBooster(generalized.get(n))){
+                BoosterArray.add(generalized.get(n));
+            }
+        }
+
+        for(int n=0;n<BoosterArray.size();n++){
+            ScoreArray.add(getBoosterScore(BoosterArray.get(n)));
+
+        }
+
+        for(Integer s : ScoreArray)
+            Log.e("Score Array: ", String.valueOf(s));
+
+        SignArray = getSign(generalized);
+
+        for(int n=0;n<ScoreArray.size();n++){
+            CombinedArray.add(String.valueOf(SignArray.get(n)) + String.valueOf(ScoreArray.get(n)));
+            for(String s : CombinedArray)
+            Log.e("Combined Array: ", s);
+
+        }
+
+        for (int n=0;n<CombinedArray.size();n++) {
+            char[] temp = CombinedArray.get(n).toCharArray();
+            if(temp[0] == '+') {
+                score = score + Character.getNumericValue(temp[1]);
+            }
+            else {
+                score = score - Character.getNumericValue(temp[1]);
+            }
+        }
+        return score;
+    }
+
+
+
+    public char getEmotionSignValue(String word) throws IOException {
+        String file = "EmotionLookupTable.txt";
+        InputStream myFile = getResources().getAssets().open(file);
+        Scanner EmotionWord = new Scanner(myFile);
+        String compare;
+        char sign = ' ';
+        while (EmotionWord.hasNextLine()) {
+            compare = EmotionWord.next();
+
+            if (word.equals(compare)) {
+                char[] temp =  EmotionWord.next().toCharArray();
+                if (temp.length == 1) {
+                    return '+';
+                }
+                else {
+                    return '-';
+                }
+
+            }
+            EmotionWord.nextLine();
+        }
+        return sign;
+    }
+
 
     public int getExtraScore(Set<String> same_occurrence) throws IOException {
         //in the case of only having one same occurrence [good] rather than [good,good] from same_occurrence array
@@ -134,17 +297,17 @@ public class Review_Activity extends AppCompatActivity {
         return score;
     }
 
-    public Set<String> checkSameOccurrence(String[] splitted_word) throws IOException {    // to check whether there is same occurrence (word) in one sentence. Return a list of same occurrence in array list.
-        int extra = 0;
-        int length = splitted_word.length -1;
+    public Set<String> checkSameOccurrence(List<String> generalized) throws IOException {    // to check whether there is same occurrence (word) in one sentence. Return a list of same occurrence in array list.
         int k=1;
         List<String> same = new ArrayList<String>();
 
-        for(int n=0;n<length;n++){
-            for(int j=0; j<splitted_word.length-k;j++) {
-                if (splitted_word[n].equals(splitted_word[j + k])) {
+        for(int n=0;n<generalized.size()-1;n++){
 
-                    same.add(splitted_word[n]);
+            for(int j=0; j<generalized.size() - k;j++) {
+
+                if (generalized.get(n).equals(generalized.get(j + k))) {
+
+                    same.add(generalized.get(n));
 
                 }
 
@@ -158,7 +321,7 @@ public class Review_Activity extends AppCompatActivity {
         return set;
     }
 
-    public int getEmotionScore(String word) throws IOException {
+    public int getEmotionScore(String word) throws IOException {            //search through the EmotionLookupTable.txt to check if particular word exists in the dictionary
 
         String file = "EmotionLookupTable.txt";
         InputStream myFile = getResources().getAssets().open(file);
@@ -183,7 +346,7 @@ public class Review_Activity extends AppCompatActivity {
         return score;
     }
 
-    public int getEmojiScore(String word) throws IOException {
+    public int getEmojiScore(String word) throws IOException {                 //search through the EmojiLookupTable.txt to check if particular word exists in the dictionary
 
         String file = "EmojiLookupTable.txt";
         InputStream myFile = getResources().getAssets().open(file);
@@ -208,7 +371,7 @@ public class Review_Activity extends AppCompatActivity {
         return score;
     }
 
-    public int getBoosterScore(String word) throws IOException {
+    public int getBoosterScore(String word) throws IOException {                //search through the BoosterWordList.txt to check if particular word exists in the dictionary
         String compare;
         String file = "BoosterWordList.txt";
         InputStream myFile = getResources().getAssets().open(file);
@@ -219,8 +382,8 @@ public class Review_Activity extends AppCompatActivity {
             compare = BoosterWord.next();
 
             if (word.equals(compare)) {
-                char[] temp = BoosterWord.next().toCharArray();
-                if (temp.length == 1) {
+                char[] temp = BoosterWord.next().toCharArray();             //decompose the word into char array. e.g -1 will be converted to ['-','1']
+                if (temp.length == 1) {                                       //if temp.length == 1 means it is a positive value
                     score = score + Character.getNumericValue(temp[0]);
                 } else {
                     score = score - Character.getNumericValue(temp[1]);
