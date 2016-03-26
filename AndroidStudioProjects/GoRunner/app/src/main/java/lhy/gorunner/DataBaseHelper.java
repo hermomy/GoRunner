@@ -51,7 +51,16 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             " posted TEXT," +
             " completed TEXT," +
             " review TEXT," +
+            " rating TEXT," +
             " DOR TEXT" +
+            ")";
+
+    private static final String CREATE_TABLE_Review = "CREATE TABLE  Review (" +
+            " review_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            " content TEXT NOT NULL," +
+            " score INTEGER NOT NULL," +
+            " user_id INTEGER NOT NULL,"+
+            " FOREIGN KEY( user_id ) REFERENCES user_id" +
             ")";
 
     private static final String CREATE_TABLE_Offer = "CREATE TABLE  Offer (" +
@@ -61,6 +70,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             " offer_date TEXT,"+
             " offer_comment TEXT" +
             ")";
+
+    String INSERT_DATA_REVIEW = "INSERT INTO Review(content,score,user_id) VALUES ('This guy is a perfect guy.','2','1'),('I felt good working with him. He is a pretty nice guy.','7','1'),('A little bit happy cause he is awesome.','5','1')";
 
     String INSERT_DATA_USER = "INSERT INTO User(user_name,password,email,phone,location,picture,expertise,posted,completed,review,DOR) VALUES ('Hau Yang','8008','lhy@gmail.com','0167772348','Johor Bahru','hauyang','Mobile development passionate','4','5','2','22/10/2013')," +
             "('Min Hua','1234','meow@gmail.com','0167723512','Puchong','meow','Graphic designer','3','2','0','2/8/2014')," +
@@ -92,9 +103,11 @@ public class DataBaseHelper extends SQLiteOpenHelper{
         _db.execSQL(CREATE_TABLE_Task);
         _db.execSQL(CREATE_TABLE_User);
         _db.execSQL(CREATE_TABLE_Offer);
+        _db.execSQL(CREATE_TABLE_Review);
         _db.execSQL(INSERT_DATA_USER);
         _db.execSQL(INSERT_DATA_TASK);
         _db.execSQL(INSERT_DATA_PAYMENT);
+        _db.execSQL(INSERT_DATA_REVIEW);
     }
 
 

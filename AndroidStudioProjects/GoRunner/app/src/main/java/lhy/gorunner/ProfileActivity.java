@@ -3,6 +3,8 @@ package lhy.gorunner;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 public class ProfileActivity extends AppCompatActivity {
     String user_id;
     LoginDataBaseAdapter loginDataBaseAdapter;
+    int score;
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +25,19 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Intent i = getIntent();
 
-        user_id = i.getStringExtra("userID");
+        recyclerView= (RecyclerView) findViewById(R.id.profile_recycler_view);
+
+        RecyclerAdapter5 adapter=new RecyclerAdapter5(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+
+        //Layout manager for Recycler view
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+       // user_id = i.getStringExtra("userID");
+
+        user_id = "1";
 
         // get Instance  of Database Adapter
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
@@ -35,8 +51,46 @@ public class ProfileActivity extends AppCompatActivity {
         TextView completed = (TextView) findViewById(R.id.text5);
         TextView review = (TextView) findViewById(R.id.text6);
         TextView location = (TextView) findViewById(R.id.profile_location);
+        TextView rating_score = (TextView)findViewById(R.id.rating_score);
+        ImageView star1 = (ImageView)findViewById(R.id.star1);
+        ImageView star2 = (ImageView)findViewById(R.id.star2);
+        ImageView star3 = (ImageView)findViewById(R.id.star3);
+        ImageView star4 = (ImageView)findViewById(R.id.star4);
+        ImageView star5 = (ImageView)findViewById(R.id.star5);
 
+        score = loginDataBaseAdapter.getReviewScore(user_id);
 
+        rating_score.setText(String.valueOf(score));
+
+        if( score>1 && score<=30){
+            star1.setImageResource(R.drawable.filledstar);
+        }
+
+        else if (score>=31 && score<=50){
+            star1.setImageResource(R.drawable.filledstar);
+            star2.setImageResource(R.drawable.filledstar);
+        }
+
+        else if (score>=51 && score<=70){
+            star1.setImageResource(R.drawable.filledstar);
+            star2.setImageResource(R.drawable.filledstar);
+            star3.setImageResource(R.drawable.filledstar);
+        }
+
+        else if (score>=71 && score<=90){
+            star1.setImageResource(R.drawable.filledstar);
+            star2.setImageResource(R.drawable.filledstar);
+            star3.setImageResource(R.drawable.filledstar);
+            star4.setImageResource(R.drawable.filledstar);
+        }
+
+        else {
+            star1.setImageResource(R.drawable.filledstar);
+            star2.setImageResource(R.drawable.filledstar);
+            star3.setImageResource(R.drawable.filledstar);
+            star4.setImageResource(R.drawable.filledstar);
+            star5.setImageResource(R.drawable.filledstar);
+        }
         name.setText(data[0]);
         location.setText(data[3]);
         expertise.setText(data[4]);
@@ -46,6 +100,8 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView profile_img = (ImageView)findViewById(R.id.image1);
         int id = getResources().getIdentifier(img, "drawable",getPackageName());
         profile_img.setImageResource(id);
+
+
     }
 
     @Override

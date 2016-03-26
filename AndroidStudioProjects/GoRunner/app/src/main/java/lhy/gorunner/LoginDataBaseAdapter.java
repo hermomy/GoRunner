@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class LoginDataBaseAdapter
@@ -120,6 +122,49 @@ public class LoginDataBaseAdapter
     }
 
 
+    public int getReviewScore(String user_id) {
+
+        int totalScore = 0;
+        int rating = 0;
+        int totalRow = 0;
+        int maxValue;
+
+        List<Integer> processed_score = new ArrayList<Integer>();
+
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Review WHERE user_id=" + user_id, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            totalRow = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
+        }
+
+        maxValue = 100 / totalRow;
+
+        Cursor c = db.rawQuery("SELECT score FROM Review WHERE user_id=" + user_id, null);
+
+        if (c.getCount() > 0) { // If cursor has atleast one row
+            c.moveToFirst();
+            do { // always prefer do while loop while you deal with database
+
+                int temp = c.getInt(c.getColumnIndex("score"));
+
+                if (temp > maxValue){
+                    temp = maxValue;
+                }
+
+                processed_score.add(temp);
+
+                c.moveToNext();
+
+            } while (!c.isAfterLast());
+
+        }
+
+        for (Integer i : processed_score){
+            rating = rating + i;
+        }
+
+        return rating;
+    }
 
     public String[] getRowItems(String task_id){
     int n;

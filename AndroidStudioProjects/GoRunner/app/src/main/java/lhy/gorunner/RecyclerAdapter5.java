@@ -28,7 +28,7 @@ public class RecyclerAdapter5 extends RecyclerView.Adapter<RecyclerViewHolder5>{
 
     @Override
     public RecyclerViewHolder5 onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = inflater.inflate(R.layout.item_list_compare, parent, false);
+        View v = inflater.inflate(R.layout.item_list_profile, parent, false);
 
         RecyclerViewHolder5 viewHolder = new RecyclerViewHolder5(v);
         return viewHolder;
@@ -42,22 +42,22 @@ public class RecyclerAdapter5 extends RecyclerView.Adapter<RecyclerViewHolder5>{
         holder.tv1.setText(name[position]);
         holder.tv2.setText(content[position]);
 
-        holder.btn1.setOnClickListener(clickListener);
-        holder.btn1.setTag(holder);
+//        holder.btn1.setOnClickListener(clickListener);
+//        holder.btn1.setTag(holder);
     }
 
-    View.OnClickListener clickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            RecyclerViewHolder5 vholder = (RecyclerViewHolder5) v.getTag();
-            int position = vholder.getPosition();
-
-            Intent i1 = new Intent(context, ViewOfferActivity.class);
-            context.startActivity(i1);
-
-        }
-    };
+//    View.OnClickListener clickListener=new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//
+//            RecyclerViewHolder5 vholder = (RecyclerViewHolder5) v.getTag();
+//            int position = vholder.getPosition();
+//
+//            Intent i1 = new Intent(context, ViewOfferActivity.class);
+//            context.startActivity(i1);
+//
+//        }
+//    };
 
 
     @Override

@@ -25,11 +25,9 @@ public class SentimentAnalysis {
         this.context = context;
     }
 
-    public void run(){
+    public int run() throws IOException {
 
         int score = 0;
-
-        try {
 
             String[] splitted_word = sentence.split(" ");
 
@@ -37,25 +35,25 @@ public class SentimentAnalysis {
 
 
     for (String s: generalized){
+
         score = score + getEmotionScore(s);                 //calculate the total score of all emotion words
+
     }
+
+            Log.e("Emotion Score: ", String.valueOf(score));
 
     for (String s: generalized){
+
         score = score + getEmojiScore(s);                   //calculate the total score of all emoji
+
     }
 
-    score = score + getTotalBoosterScore(generalized);       //calculate the total score of all booster words
+             score = score + getTotalBoosterScore(generalized);       //calculate the total score of all booster words
 
 
-    Log.e("Total Score: ", String.valueOf(score));
+             Log.e("Total Score: ", String.valueOf(score));
 
-
-        } catch (FileNotFoundException e) {
-        e.printStackTrace();
-        } catch (IOException e) {
-        e.printStackTrace();
-        }
-
+    return score;
     }
 
     public List<String> generalizeSentence(String[] splitted_word) throws IOException {
@@ -148,8 +146,8 @@ public class SentimentAnalysis {
         SignArray = getSign(generalized);                       //Sign Array. e.g ['+','-','-']
 
         for(int n=0;n<ScoreArray.size();n++){
-            CombinedArray.add(String.valueOf(SignArray.get(n)) + String.valueOf(ScoreArray.get(n)));      //Combined two array: SignArray & Score Array to form an combined array. e.g [+3,-4,-1]
 
+            CombinedArray.add(String.valueOf(SignArray.get(n)) + String.valueOf(ScoreArray.get(n)));      //Combined two array: SignArray & Score Array to form an combined array. e.g [+3,-4,-1]
 
         }
 
@@ -161,33 +159,55 @@ public class SentimentAnalysis {
             if(temp[0] == '+') {
                 score = score + Character.getNumericValue(temp[1]);
             }
-            else {
+            else if(temp[0] == '-') {
                 score = score - Character.getNumericValue(temp[1]);
             }
+            else {
+                score = score + 0;                  //assume -> cannot find emotion word after booster word
+            }
         }
-        return score;                       //return the total score of booster words
+
+        Log.e("Booster Score: ", String.valueOf(score));
+        return score;                                         //return the total score of booster words
     }
 
 
     public List<Character> getSign(List<String> generalized) throws IOException {
         List <Character> sign = new ArrayList<Character>();
 
+        int arraySize = generalized.size();
+
         for (int n=0;n<generalized.size();n++){
 
+            here:
             if( checkBooster(generalized.get(n))){               //if current word is a booster word then it will check for next first occurrence of emotion word
 
-                for(int j=1;j<=generalized.size()-1;j++) {
+                if(n != arraySize-1) {
 
-                    if(checkEmotion(generalized.get(n+1))){
+                    for (int j = 1; j <= generalized.size() - 1; j++) {
 
-                        sign.add(getEmotionSignValue(generalized.get(n + 1)));
+                        if (checkEmotion(generalized.get(j))) {
+
+                            sign.add(getEmotionSignValue(generalized.get(n + 1)));   //get sign value of a particular emotion word which is either positive or negative. '-' or '+'
+                            break here;
+                        }
 
                     }
-
-
                 }
+
+                else {
+                    sign.add('n');
+                }
+
             }
+
+
         }
+
+        if(sign.isEmpty()){
+            sign.add('n');                                      //if there is no emotion word found after booster word then return neural ('n')
+        }
+
         for(Character s : sign)
             Log.e("Sign Array: ", s.toString());
         return sign;
