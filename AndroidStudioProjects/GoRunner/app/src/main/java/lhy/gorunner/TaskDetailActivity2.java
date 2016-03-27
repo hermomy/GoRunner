@@ -27,6 +27,7 @@ public class TaskDetailActivity2  extends AppCompatActivity {
     String[]data = new String[5];
     String[]userData = new String[2];
     String price;
+    String user_id;
     String tempID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class TaskDetailActivity2  extends AppCompatActivity {
 
         loginDataBaseAdapter=loginDataBaseAdapter.open();
 
-
+        user_id = getIntent().getStringExtra("userID") ;
         final Button offerbutton = (Button)findViewById(R.id.offer_btn);
         TextView task_name = (TextView)findViewById(R.id.task_name);
         ImageView img =  (ImageView)findViewById(R.id.pic_in_task_detail5);
@@ -105,9 +106,11 @@ public class TaskDetailActivity2  extends AppCompatActivity {
 
                     alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
+                            Intent i1 = new Intent(getApplication(), Review_Activity.class);
+                            i1.putExtra("task_id","2");
+                            i1.putExtra("userID",user_id);
+                            startActivity(i1);
 
-                            //OR
-                            String YouEditTextValue = edittext.getText().toString();
                         }
                     });
 

@@ -18,12 +18,28 @@ import java.util.Set;
 public class SentimentAnalysis {
     String sentence;
     private Context context;
-
+    List <String> BoosterArray ;
+    List <Integer> ScoreArray;
+    List <Character> SignArray ;
+    List <String> CombinedArray;
+    int getResultEmotion=0;
+    int getResultBooster=0;
+    int getResultEmoji =0;
+    int getResultTotalScore = 0;
     public SentimentAnalysis(Context context,String sentence){
 
         this.sentence = sentence;
         this.context = context;
     }
+
+//    public int[] getResultData(){
+//        int[] temp = new int[4];
+//        temp[0] = this.getResultEmotion;
+//        temp[1] = this.getResultBooster;
+//        temp[2] = this.getResultEmoji;
+//        temp[3] = this.getResultTotalScore;
+//        return temp;
+//    }
 
     public int run() throws IOException {
 
@@ -42,15 +58,18 @@ public class SentimentAnalysis {
 
             Log.e("Emotion Score: ", String.valueOf(score));
 
+        this.getResultEmotion = score;       //return for result
+
     for (String s: generalized){
 
         score = score + getEmojiScore(s);                   //calculate the total score of all emoji
 
     }
 
-             score = score + getTotalBoosterScore(generalized);       //calculate the total score of all booster words
 
+        score = score + getTotalBoosterScore(generalized);       //calculate the total score of all booster words
 
+        getResultTotalScore = score;
              Log.e("Total Score: ", String.valueOf(score));
 
     return score;
@@ -124,10 +143,10 @@ public class SentimentAnalysis {
     }
 
     public int getTotalBoosterScore(List<String> generalized) throws IOException {
-        List <String> BoosterArray = new ArrayList<String>();
-        List <Integer> ScoreArray = new ArrayList<Integer>();
-        List <Character> SignArray = new ArrayList<Character>();
-        List <String> CombinedArray = new ArrayList<String>();
+        BoosterArray = new ArrayList<String>();
+        ScoreArray = new ArrayList<Integer>();
+        SignArray = new ArrayList<Character>();
+        CombinedArray = new ArrayList<String>();
         int score = 0 ;
         for(int n=0;n<generalized.size();n++){
             if(checkBooster(generalized.get(n))){
@@ -167,6 +186,7 @@ public class SentimentAnalysis {
             }
         }
 
+        this.getResultBooster = score;
         Log.e("Booster Score: ", String.valueOf(score));
         return score;                                         //return the total score of booster words
     }
@@ -325,6 +345,7 @@ public class SentimentAnalysis {
             }
             Emoji.nextLine();
         }
+        this.getResultEmoji = score;
         return score;
     }
 

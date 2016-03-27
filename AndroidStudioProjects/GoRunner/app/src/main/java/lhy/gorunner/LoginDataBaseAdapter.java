@@ -18,8 +18,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class LoginDataBaseAdapter
-{
+public class LoginDataBaseAdapter {
     static final String DATABASE_NAME = "database.db";
     static final int DATABASE_VERSION = 1;
     public static final int NAME_COLUMN = 1;
@@ -29,38 +28,35 @@ public class LoginDataBaseAdapter
 
 
     // Variable to hold the database instance
-    public  SQLiteDatabase db;
+    public SQLiteDatabase db;
     // Context of the application using the database.
     private final Context context;
     // Database open/upgrade helper
     private DataBaseHelper dbHelper;
-    public  LoginDataBaseAdapter(Context _context)
-    {
+
+    public LoginDataBaseAdapter(Context _context) {
         context = _context;
         dbHelper = new DataBaseHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }
-    public  LoginDataBaseAdapter open() throws SQLException
-    {
+
+    public LoginDataBaseAdapter open() throws SQLException {
         db = dbHelper.getWritableDatabase();
         return this;
     }
-    public void close()
-    {
+
+    public void close() {
         db.close();
     }
 
-    public  SQLiteDatabase getDatabaseInstance()
-    {
+    public SQLiteDatabase getDatabaseInstance() {
         return db;
     }
 
-    public boolean Login(String email, String password) throws SQLException
-    {
-        Cursor mCursor = db.rawQuery("SELECT * FROM user WHERE email=? AND password=?", new String[]{email,password});
+    public boolean Login(String email, String password) throws SQLException {
+        Cursor mCursor = db.rawQuery("SELECT * FROM user WHERE email=? AND password=?", new String[]{email, password});
         if (mCursor != null) {
-            if(mCursor.getCount() > 0)
-            {
+            if (mCursor.getCount() > 0) {
                 return true;
             }
         }
@@ -68,15 +64,15 @@ public class LoginDataBaseAdapter
     }
 
 
-    public void createAccount(String username,String password,String email){
+    public void createAccount(String username, String password, String email) {
 
         ContentValues newValues = new ContentValues();
-        newValues.put("user_name",username);
-        newValues.put("password",password);
-        newValues.put("email",email);
-        newValues.put("phone","");
-        newValues.put("location","");
-        newValues.put("picture","user_pic");
+        newValues.put("user_name", username);
+        newValues.put("password", password);
+        newValues.put("email", email);
+        newValues.put("phone", "");
+        newValues.put("location", "");
+        newValues.put("picture", "user_pic");
         newValues.put("DOR", getDateTime());
 
         db.insert("User", null, newValues);
@@ -84,16 +80,34 @@ public class LoginDataBaseAdapter
 
     }
 
-    public void insertNewTask(String title,String details,String address,String price,String user_id){
+    public void createComment(String content, int score, String user_id, String reviewer_id) {
 
-       ContentValues newValues = new ContentValues();
-        newValues.put("taskname",title);
-        newValues.put("taskdesc",details);
-        newValues.put("price",price);
-        newValues.put("date",getDateTime());
-        newValues.put("location",address);
-        newValues.put("status","OPEN");
-        newValues.put("category","Home");
+        ContentValues newValues = new ContentValues();
+        newValues.put("content", content);
+        newValues.put("score", score);
+        newValues.put("user_id", user_id);
+        newValues.put("reviewer_id", reviewer_id);
+
+        db.insert("Review", null, newValues);
+        Toast.makeText(context, "Thanks for giving a review! :)", Toast.LENGTH_LONG).show();
+
+    }
+    public void insertRating(String user_id,int score){
+        ContentValues newValues = new ContentValues();
+        newValues.put("rating", score);
+
+        db.update("User", newValues, "user_id= " + user_id, null);
+    }
+    public void insertNewTask(String title, String details, String address, String price, String user_id) {
+
+        ContentValues newValues = new ContentValues();
+        newValues.put("taskname", title);
+        newValues.put("taskdesc", details);
+        newValues.put("price", price);
+        newValues.put("date", getDateTime());
+        newValues.put("location", address);
+        newValues.put("status", "OPEN");
+        newValues.put("category", "Home");
         newValues.put("user_id", user_id);
 
         db.insert("Task", null, newValues);
@@ -101,19 +115,20 @@ public class LoginDataBaseAdapter
 
     }
 
-    public void insertNewOffer(String user_id,String task_user_id,String comment){
+    public void insertNewOffer(String user_id, String task_user_id, String comment) {
 
         ContentValues newValues = new ContentValues();
-        newValues.put("user_id",user_id);
-        newValues.put("task_user_id",task_user_id);
-        newValues.put("offer_date",getDateTime());
-        newValues.put("offer_comment",comment);
+        newValues.put("user_id", user_id);
+        newValues.put("task_user_id", task_user_id);
+        newValues.put("offer_date", getDateTime());
+        newValues.put("offer_comment", comment);
 
 
         db.insert("Offer", null, newValues);
         Toast.makeText(context, "Offer inserted to database", Toast.LENGTH_LONG).show();
 
     }
+
     private String getDateTime() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd", Locale.getDefault());
@@ -121,10 +136,40 @@ public class LoginDataBaseAdapter
         return dateFormat.format(date);
     }
 
+    public String[][] getReviewItems(String user_id) {
 
-    public int getReviewScore(String user_id) {
+        Cursor c = db.rawQuery("SELECT * FROM Review WHERE user_id=" + user_id, null);
+        String totalRow = String.valueOf(c.getCount());
+        int cPos;
+        String[][] array = new String[c.getCount()][2];
 
-        int totalScore = 0;
+        if (c.getCount() > 0) { // If cursor has atleast one row
+            c.moveToFirst();
+            do { // always prefer do while loop while you deal with database
+                cPos = c.getPosition();
+                array[cPos][0] = c.getString(c.getColumnIndex("content"));
+                array[cPos][1] = c.getString(c.getColumnIndex("reviewer_id"));
+                c.moveToNext();
+            } while (!c.isAfterLast());
+
+        } else {
+            Log.e("SQL Query Error", "Cursor has no data");
+        }
+        return array;
+    }
+
+        public int getReviewTotalRow(String user_id){
+
+            Cursor mCount= db.rawQuery("SELECT COUNT(*) FROM Review WHERE user_id=" + user_id, null);
+            mCount.moveToFirst();
+            int count= mCount.getInt(0);
+            mCount.close();
+
+            return count;
+        }
+
+    public int getReviewScore(String user_id) {         //calculation of rating score
+
         int rating = 0;
         int totalRow = 0;
         int maxValue;
@@ -136,7 +181,9 @@ public class LoginDataBaseAdapter
             cursor.moveToFirst();
             totalRow = cursor.getInt(cursor.getColumnIndex("COUNT(*)"));
         }
-
+        if (totalRow==0){
+            totalRow = 1;
+        }
         maxValue = 100 / totalRow;
 
         Cursor c = db.rawQuery("SELECT score FROM Review WHERE user_id=" + user_id, null);
@@ -226,7 +273,7 @@ public class LoginDataBaseAdapter
     }
     public String[] getUserItems(String user_id){
 
-        String[] item= new String[8];
+        String[] item= new String[9];
         Cursor cursor = db.rawQuery("SELECT * FROM User WHERE user_id='" + user_id + "'", null);
         if(cursor.getCount()>0) {
             cursor.moveToFirst();
@@ -238,7 +285,7 @@ public class LoginDataBaseAdapter
             item[5] = cursor.getString(cursor.getColumnIndex("posted"));
             item[6] = cursor.getString(cursor.getColumnIndex("completed"));
             item[7] = cursor.getString(cursor.getColumnIndex("review"));
-
+            item[8] = cursor.getString(cursor.getColumnIndex("rating"));
         }
 
         return item;

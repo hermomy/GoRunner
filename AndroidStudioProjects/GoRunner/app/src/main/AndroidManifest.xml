@@ -30,43 +30,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.Dark"></activity>
-        <activity
-            android:name=".SignupActivity"
-            android:theme="@style/AppTheme.Dark" />
-        <activity
-            android:name=".SplashActivity"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/SplashTheme"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme">
-
-        </activity>
-        <activity
-            android:name=".Browse_Activity"
-            android:label=""
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".TaskDetailActivity"
-            android:label="Task Details"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".TaskDetailActivity2"
-            android:label="Task Details"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".MakeOfferActivity"
-            android:label="Make an Offer"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".ConfirmOfferActivity"
-            android:label="Confirm Offer"
-            android:theme="@style/AppTheme"></activity>
-        <activity
-            android:name=".ProfileActivity"
-            android:label="Profile">
+            android:theme="@style/AppTheme.Dark">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -74,11 +38,45 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SignupActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".Browse_Activity"
+            android:label=""
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TaskDetailActivity"
+            android:label="Task Details"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TaskDetailActivity2"
+            android:label="Task Details"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MakeOfferActivity"
+            android:label="Make an Offer"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ConfirmOfferActivity"
+            android:label="Confirm Offer"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile"></activity>
+        <activity
             android:name=".CreateTaskActivity"
-            android:label="Create Task"></activity>
+            android:label="Create Task" />
         <activity
             android:name=".CompareActivity"
-            android:label="View offer"></activity>
+            android:label="View offer" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -93,16 +91,20 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".ViewOfferActivity"
-            android:label="Offer"></activity>
+            android:label="Offer" />
         <activity
             android:name=".MyTaskActivity"
             android:label="My Task"></activity>
-
-        <activity android:name=".Review_Activity"
-            android:label="Write Review">
+        <activity
+            android:name=".Review_Activity"
+            android:label="Write Review"></activity>
+        <activity
+            android:name=".OtherProfileActivity"
+            android:label="Profile"></activity>
+        <activity android:name=".DisplaySentiAnalysis">
 
         </activity>
     </application>

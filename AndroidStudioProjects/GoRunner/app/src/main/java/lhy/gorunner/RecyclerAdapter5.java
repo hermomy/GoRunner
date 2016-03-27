@@ -11,19 +11,25 @@ import android.view.ViewGroup;
  * Created by HAUYANG on 25/03/2016.
  */
 public class RecyclerAdapter5 extends RecyclerView.Adapter<RecyclerViewHolder5>{
-    String[] name = {"Wei Sian", "Min Hua","Eric Tiew","Ann Pei","Wei Jie"};
-    int[] image = {R.drawable.weisian,R.drawable.meow,R.drawable.eric,R.drawable.annpei,R.drawable.weijie};
-    String[] content ={ "In the form of a business: Electricity and Electronic Technician Services\n\nDomestic services as Cleaner and others Handworks\nComputer maintenance (hardware e software); Internet access configuration; virus removal, etc;\n\nCompanies: Development of WEB applications (Java / PHP ) with MYSQL, MSSQL, POSTGRESS, ETC; and smartphone app.",
-            "Hi\n\nI have a A.D in photoimaging and years of experience with photography , Photoshop and logo design.\n\nI also sketch realism portraits and transform people with special effects makeup.",
-            "Hi\n\n20 Year old currently studying a bachelor of IT, with experience in many fields.\n\nIncluding Face to Face sales and marketing (To customers and businesses), Call centres (Sales, Debt Recovery), Data Entry,Admin Work, IT (Web Design, SEO, Repairs), and many more.",
-            "Hello,\n\nMy name is Eric Tiew.I am an architect-engineer and a graphic designer currently based in Brisbane on an Australian working\nvisa. I am available to work casual or part-time and available to start immediately.\n\nI worked for more than 7 years as a project manager for an engineering firm \"Artech studio s.r.l.",
-            "Worked in building industry for 12yrs then as a courier for 10yrs. Have bred and showed dogs in the past as a hobby.\n\nDrive a van. Currently attempting to renovate an inner city terrace."};
+    String[] name ;
+    String[] image;
+    String[] content;
     Context context;
     LayoutInflater inflater;
+    LoginDataBaseAdapter loginDataBaseAdapter;
+    String user_id;
+    int totalRow;
 
-    public RecyclerAdapter5(Context context) {
+
+    public RecyclerAdapter5(Context context,String user_id) {
         this.context = context;
+        this.user_id = user_id;
         inflater = LayoutInflater.from(context);
+        loginDataBaseAdapter = new LoginDataBaseAdapter(context);
+        loginDataBaseAdapter = loginDataBaseAdapter.open();
+
+
+        totalRow = loginDataBaseAdapter.getReviewTotalRow(user_id);
     }
 
     @Override
@@ -31,38 +37,38 @@ public class RecyclerAdapter5 extends RecyclerView.Adapter<RecyclerViewHolder5>{
         View v = inflater.inflate(R.layout.item_list_profile, parent, false);
 
         RecyclerViewHolder5 viewHolder = new RecyclerViewHolder5(v);
-        return viewHolder;
+        String[][] array;
+        array= loginDataBaseAdapter.getReviewItems(user_id);
+
+
+        name = new String[totalRow];
+        image = new String[totalRow];
+        content = new String[totalRow];
+
+        for(int n=0;n<totalRow;n++) {
+            content[n] = array[n][0];
+            String[]temp = loginDataBaseAdapter.getUserItems(array[n][1]);
+            name[n] = temp[0];
+            image[n] = temp[1];
+        }
+
+            return viewHolder;
     }
 
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder5 holder, int position) {
-
-        holder.pic.setImageResource(image[position]);
+        int id = context.getApplicationContext().getResources().getIdentifier(image[position] , "drawable", context.getApplicationContext().getPackageName());
+        holder.pic.setImageResource(id);
         holder.tv1.setText(name[position]);
         holder.tv2.setText(content[position]);
 
-//        holder.btn1.setOnClickListener(clickListener);
-//        holder.btn1.setTag(holder);
     }
-
-//    View.OnClickListener clickListener=new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//
-//            RecyclerViewHolder5 vholder = (RecyclerViewHolder5) v.getTag();
-//            int position = vholder.getPosition();
-//
-//            Intent i1 = new Intent(context, ViewOfferActivity.class);
-//            context.startActivity(i1);
-//
-//        }
-//    };
 
 
     @Override
     public int getItemCount() {
-        return name.length;
+        return totalRow;
     }
 }
 

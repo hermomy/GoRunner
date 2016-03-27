@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,7 +28,9 @@ public class Review_Activity extends AppCompatActivity {
     String user_id;
     String task_name;
     EditText content;
-
+    String task_id;
+    String post_task_user;
+String[] item;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,15 +41,20 @@ public class Review_Activity extends AppCompatActivity {
         Intent i = getIntent();
 
         // user_id = i.getStringExtra("userID");
-        user_id = "1";
-        //task_name = i.getStringExtra("taskname");
-        task_name = "Graphic design work";
+        user_id = getIntent().getStringExtra("userID");
+        task_id = getIntent().getStringExtra("task_id");
+
         // get Instance  of Database Adapter
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
+        item = loginDataBaseAdapter.getRowItems(task_id);
 
-        String img = loginDataBaseAdapter.getUserPic(user_id);
-        String[] data = loginDataBaseAdapter.getUserItems(user_id);
+        task_name = item[0];
+
+         post_task_user = item[4];
+
+        String img = loginDataBaseAdapter.getUserPic(post_task_user);
+        String[] data = loginDataBaseAdapter.getUserItems(post_task_user);
         TextView name = (TextView) findViewById(R.id.review_name);
         TextView title = (TextView) findViewById(R.id.review_title);
         ImageView profile_img = (ImageView) findViewById(R.id.review_pic);
@@ -64,16 +72,34 @@ public class Review_Activity extends AppCompatActivity {
     View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String sentence = content.getText().toString();
 
+            String sentence = content.getText().toString();
+        if(!sentence.matches("")) {
             SentimentAnalysis analysis1 = new SentimentAnalysis(getApplicationContext(), sentence);
 
             try {
-                analysis1.run();
+                int score = analysis1.run();
 
+                loginDataBaseAdapter.createComment(sentence, score, post_task_user, user_id);  // * user_id and post_task_user is reversed in this activity
+
+
+                int rating = loginDataBaseAdapter.getReviewScore(post_task_user);
+                loginDataBaseAdapter.insertRating(post_task_user, rating);
+
+
+                Intent i1 = new Intent(getApplication(), OtherProfileActivity.class);
+                i1.putExtra("otherUserID", post_task_user);
+                i1.putExtra("userID", user_id);
+
+                startActivity(i1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+            else {
+            Toast.makeText(getApplicationContext(), "Please enter a valid content!", Toast.LENGTH_LONG).show();
+            }
+
 
 
         }

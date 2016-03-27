@@ -3,6 +3,7 @@ package lhy.gorunner;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ String user_id;
     public RecyclerAdapter3(Context context,String user_id) {
         this.context = context;
         this.user_id = user_id;
+
         inflater = LayoutInflater.from(context);
     }
 
@@ -69,6 +71,7 @@ String user_id;
                 i1.putExtra("task_id","2");
                 i1.putExtra("value",name[position]);
                 i1.putExtra("btn_name","RELEASE");
+                i1.putExtra("userID",user_id);
                 context.startActivity(i1);
             }
 
@@ -77,6 +80,7 @@ String user_id;
                 i1.putExtra("task_id","2");
                 i1.putExtra("value",name[position]);
                 i1.putExtra("btn_name","REQUEST");
+                i1.putExtra("userID",user_id);
                 context.startActivity(i1);
             }
         }

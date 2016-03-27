@@ -82,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
         temp = new String[3];
 
-//        Intent i = getIntent();
-//        user_id = i.getStringExtra("userID");
+        Intent i = getIntent();
+        user_id = i.getStringExtra("userID");
 
-        user_id = "1";
+      //  user_id = "1";
         //Toast.makeText(this, "user_id = " + user_id, Toast.LENGTH_LONG).show();
 
         temp = loginDataBaseAdapter.getUserItems(user_id);

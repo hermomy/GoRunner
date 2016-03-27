@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,7 +22,8 @@ public class MyTaskActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Intent i = getIntent();
-        i.getStringExtra("userID");
+        user_id = i.getStringExtra("userID");
+
 
         recyclerView= (RecyclerView) findViewById(R.id.my_recycler_view3);
 

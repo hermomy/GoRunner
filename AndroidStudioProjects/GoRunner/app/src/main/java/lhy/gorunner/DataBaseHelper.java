@@ -51,7 +51,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             " posted TEXT," +
             " completed TEXT," +
             " review TEXT," +
-            " rating TEXT," +
+            " rating INTEGER," +
             " DOR TEXT" +
             ")";
 
@@ -60,6 +60,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             " content TEXT NOT NULL," +
             " score INTEGER NOT NULL," +
             " user_id INTEGER NOT NULL,"+
+            " reviewer_id INTEGER NOT NULL,"+
             " FOREIGN KEY( user_id ) REFERENCES user_id" +
             ")";
 
@@ -71,9 +72,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             " offer_comment TEXT" +
             ")";
 
-    String INSERT_DATA_REVIEW = "INSERT INTO Review(content,score,user_id) VALUES ('This guy is a perfect guy.','2','1'),('I felt good working with him. He is a pretty nice guy.','7','1'),('A little bit happy cause he is awesome.','5','1')";
+    String INSERT_DATA_REVIEW = "INSERT INTO Review(content,score,user_id,reviewer_id) VALUES ('This guy is a perfect guy.','2','1','2'),('I felt good working with him. He is a pretty nice guy.','7','1','4'),('A little bit happy cause he is awesome.','5','1','3'),('A little bit happy cause he is awesome.','5','2','3')";
 
-    String INSERT_DATA_USER = "INSERT INTO User(user_name,password,email,phone,location,picture,expertise,posted,completed,review,DOR) VALUES ('Hau Yang','8008','lhy@gmail.com','0167772348','Johor Bahru','hauyang','Mobile development passionate','4','5','2','22/10/2013')," +
+    String INSERT_DATA_USER = "INSERT INTO User(user_name,password,email,phone,location,picture,expertise,posted,completed,review,DOR) VALUES ('Hau Yang','0000','lhy@gmail.com','0167772348','Johor Bahru','hauyang','Mobile development passionate','4','5','2','22/10/2013')," +
             "('Min Hua','1234','meow@gmail.com','0167723512','Puchong','meow','Graphic designer','3','2','0','2/8/2014')," +
             "('Eric Tiew','1234','khcy3eric@nottingham.edu.my','0167743533','Cheras','eric','PHP expert','3','5','2','12/5/2013')," +
             "('Wei Jie','1234','khcy3wjie@nottingham.edu.my','0161123512','Batu Pahat','weijie','Cleaner','1','2','2','25/1/2013')," +
@@ -83,7 +84,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     String INSERT_DATA_PAYMENT = "INSERT INTO Payment(amount, condition) VALUES ('500','0'),('200','0'),('350',0),('400','0')";
 
     String INSERT_DATA_TASK = "INSERT INTO Task(taskname,taskdesc,category,price,date,location,status,user_id) VALUES ('Graphic design work','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Home','200','2016-03-17','Selangor','OPEN','6')," +
-            "('Social media promoting','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','150','2016-03-18','Cheras','ASSIGN','2')," +
+            "('Social media promoting','Hi, we need a lady with more than 800 friends on Facebook to help us promote our private sale (Handmade, Limited Edition Jewellery).We will give you a PRIVATE discount code of 35% Discount. This counpon code is valid for 1 week.','Home','150','2016-03-18','Cheras','ASSIGN','3')," +
             "('Data Entry','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','200','2016-03-18','Puchong','OPEN','3')," +
             "('Mcdonalds delivery','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Fitness','200','2016-03-18','Selangor','OPEN','4')," +
             "('150 Facebook Likes','I need someone to help me with a company logo finish off business cards that had wrong details and also design a number of marketing stuff for me and email signatures as well as letter heads','Photography','300','2016-03-18','Johor','OPEN','3')," +

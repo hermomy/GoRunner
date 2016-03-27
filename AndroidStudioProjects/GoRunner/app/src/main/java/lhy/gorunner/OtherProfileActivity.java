@@ -12,8 +12,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ProfileActivity extends AppCompatActivity {
-    String user_id;
+public class OtherProfileActivity extends AppCompatActivity {
+    String user_id,post_task_user_id;
     LoginDataBaseAdapter loginDataBaseAdapter;
     int score;
     RecyclerView recyclerView;
@@ -25,17 +25,15 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Intent i = getIntent();
 
-
-
-       // user_id = i.getStringExtra("userID");
+        // user_id = i.getStringExtra("userID");
 
         user_id = i.getStringExtra("userID");
 
-
+        post_task_user_id = i.getStringExtra("otherUserID");
 
         recyclerView= (RecyclerView) findViewById(R.id.profile_recycler_view);
 
-        RecyclerAdapter5 adapter=new RecyclerAdapter5(this,user_id);
+        RecyclerAdapter5 adapter=new RecyclerAdapter5(this,post_task_user_id);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -48,8 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
         loginDataBaseAdapter=new LoginDataBaseAdapter(this);
         loginDataBaseAdapter=loginDataBaseAdapter.open();
 
-        String img = loginDataBaseAdapter.getUserPic(user_id);
-        String[] data = loginDataBaseAdapter.getUserItems(user_id);
+        String img = loginDataBaseAdapter.getUserPic(post_task_user_id);
+        String[] data = loginDataBaseAdapter.getUserItems(post_task_user_id);
         TextView name = (TextView) findViewById(R.id.text1);
         TextView expertise = (TextView) findViewById(R.id.text3);
         TextView posted = (TextView) findViewById(R.id.text4);
@@ -63,8 +61,9 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView star4 = (ImageView)findViewById(R.id.star4);
         ImageView star5 = (ImageView)findViewById(R.id.star5);
 
-        score = loginDataBaseAdapter.getReviewScore(user_id);
+        String[] temp = loginDataBaseAdapter.getUserItems(post_task_user_id);
 
+        score = Integer.parseInt(temp[8]);
         rating_score.setText(String.valueOf(score));
 
         if( score>1 && score<=30){
@@ -89,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
             star4.setImageResource(R.drawable.filledstar);
         }
 
-        else if (score>=91 && score <=100){
+        else {
             star1.setImageResource(R.drawable.filledstar);
             star2.setImageResource(R.drawable.filledstar);
             star3.setImageResource(R.drawable.filledstar);
