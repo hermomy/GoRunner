@@ -22,31 +22,22 @@ public class SentimentAnalysis {
     List <Integer> ScoreArray;
     List <Character> SignArray ;
     List <String> CombinedArray;
-    int getResultEmotion=0;
-    int getResultBooster=0;
-    int getResultEmoji =0;
-    int getResultTotalScore = 0;
+
     public SentimentAnalysis(Context context,String sentence){
 
         this.sentence = sentence;
         this.context = context;
     }
 
-//    public int[] getResultData(){
-//        int[] temp = new int[4];
-//        temp[0] = this.getResultEmotion;
-//        temp[1] = this.getResultBooster;
-//        temp[2] = this.getResultEmoji;
-//        temp[3] = this.getResultTotalScore;
-//        return temp;
-//    }
-
     public int run() throws IOException {
 
         int score = 0;
 
-            String[] splitted_word = sentence.split(" ");
+            String[] splitted_word =  sentence.split("[ .,?]");
 
+for (String s: splitted_word){
+    Log.e("splitted word: ", String.valueOf(s));
+}
             List<String> generalized = generalizeSentence(splitted_word);              //generalize the splitted_word by putting only emotion word,booster word and emoji in the array
 
 
@@ -58,18 +49,12 @@ public class SentimentAnalysis {
 
             Log.e("Emotion Score: ", String.valueOf(score));
 
-        this.getResultEmotion = score;       //return for result
-
-    for (String s: generalized){
-
-        score = score + getEmojiScore(s);                   //calculate the total score of all emoji
-
-    }
+        score = score + getEmojiScore(generalized);                   //calculate the total score of all emoji
 
 
         score = score + getTotalBoosterScore(generalized);       //calculate the total score of all booster words
 
-        getResultTotalScore = score;
+
              Log.e("Total Score: ", String.valueOf(score));
 
     return score;
@@ -186,7 +171,7 @@ public class SentimentAnalysis {
             }
         }
 
-        this.getResultBooster = score;
+
         Log.e("Booster Score: ", String.valueOf(score));
         return score;                                         //return the total score of booster words
     }
@@ -259,6 +244,140 @@ public class SentimentAnalysis {
     }
 
 
+
+
+    public int getEmotionScore(String word) throws IOException {            //search through the EmotionLookupTable.txt to check if particular word exists in the dictionary
+
+        String file = "EmotionLookupTable.txt";
+        InputStream myFile = context.getResources().getAssets().open(file);
+        Scanner EmotionWord = new Scanner(myFile);
+        String compare;
+        int score = 0;
+
+        while (EmotionWord.hasNextLine()) {
+            compare = EmotionWord.next();
+
+            if (word.equals(compare)) {
+                char[] temp =  EmotionWord.next().toCharArray();
+                if (temp.length == 1) {
+                    score = score + Character.getNumericValue(temp[0]);
+                } else {
+                    score = score - Character.getNumericValue(temp[1]);
+                }
+                break;
+            }
+            EmotionWord.nextLine();
+        }
+        return score;
+    }
+
+//    public int getEmojiScore(String word) throws IOException {                 //search through the EmojiLookupTable.txt to check if particular word exists in the dictionary
+//
+//        String file = "EmojiLookupTable.txt";
+//        InputStream myFile = context.getResources().getAssets().open(file);
+//        Scanner Emoji = new Scanner(myFile);
+//        String compare;
+//        int score = 0;
+//
+//        while (Emoji.hasNextLine()) {
+//            compare = Emoji.next();
+//
+//            if (word.equals(compare)) {
+//                char[] temp =  Emoji.next().toCharArray();
+//                if (temp.length == 1) {
+//                    score = score + Character.getNumericValue(temp[0]);
+//                } else {
+//                    score = score - Character.getNumericValue(temp[1]);
+//                }
+//                break;
+//            }
+//            Emoji.nextLine();
+//        }
+//
+//        return score;
+//    }
+    public int getEmojiScore(List<String> generalized) throws IOException {                 //search through the EmojiLookupTable.txt to check if particular word exists in the dictionary
+
+        String file = "EmojiLookupTable.txt";
+        InputStream myFile = context.getResources().getAssets().open(file);
+        Scanner Emoji = new Scanner(myFile);
+        String compare;
+        int score = 0;
+
+        while (Emoji.hasNextLine()) {
+            compare = Emoji.next();
+            Log.e("compare ", compare);
+            for (int i = 0; i < generalized.size(); i++) {
+                if (i > 0) {
+                    if (generalized.get(i).equals(compare)) {
+                        if (generalized.get(i).equals("!!") || generalized.get(i).equals("!!!") || generalized.get(i).equals("!!!!")) {     //to detect word before exclamation mark
+
+                                int tempscore = getEmotionScore(generalized.get(i - 1));
+                                char[] temp = Emoji.next().toCharArray();
+                            for(Character s : temp){
+                                Log.e("temp ", String.valueOf(s) );
+                            }
+                                if (tempscore != 0 && tempscore < 0 && temp.length == 1) {
+
+                                        score = score - Character.getNumericValue(temp[0]);
+                                        Log.e("<0 ", String.valueOf(score) );
+
+                                    } else if (tempscore != 0 && tempscore > 0 ){
+
+                                        Log.e("temp[0] ", String.valueOf(Character.getNumericValue(temp[0])));
+                                        score = score + Character.getNumericValue(temp[0]);
+                                        Log.e(">0 ", String.valueOf(score) );
+                                    }
+
+                        } else {
+                            char[] temp = Emoji.next().toCharArray();
+                            if (temp.length == 1) {
+                                score = score + Character.getNumericValue(temp[0]);
+                            } else {
+                                score = score - Character.getNumericValue(temp[1]);
+                            }
+
+                        }
+
+                    }
+                }
+
+
+
+            }
+            if(Emoji.hasNextLine())
+                Emoji.nextLine();
+            else
+                break;
+        }
+        Log.e("Emoji Score: ", String.valueOf(score));
+        return score;
+    }
+
+    public int getBoosterScore(String word) throws IOException {                //search through the BoosterWordList.txt to check if particular word exists in the dictionary
+        String compare;
+        String file = "BoosterWordList.txt";
+        InputStream myFile = context.getResources().getAssets().open(file);
+        int score=0;
+        Scanner BoosterWord = new Scanner(myFile);
+        while (BoosterWord.hasNextLine()) {
+
+            compare = BoosterWord.next();
+
+            if (word.equals(compare)) {
+                char[] temp = BoosterWord.next().toCharArray();             //decompose the word into char array. e.g -1 will be converted to ['-','1']
+                if (temp.length == 1) {                                       //if temp.length == 1 means it is a positive value
+                    score = score + Character.getNumericValue(temp[0]);
+                } else {
+                    score = score - Character.getNumericValue(temp[1]);
+                }
+                break;
+            }
+            BoosterWord.nextLine();
+        }
+        return score;
+    }
+
     public int getExtraScore(Set<String> same_occurrence) throws IOException {
         //in the case of only having one same occurrence [good] rather than [good,good] from same_occurrence array
         //in the case of only booster word has more than one occurrence
@@ -297,79 +416,5 @@ public class SentimentAnalysis {
 
         return set;
     }
-
-    public int getEmotionScore(String word) throws IOException {            //search through the EmotionLookupTable.txt to check if particular word exists in the dictionary
-
-        String file = "EmotionLookupTable.txt";
-        InputStream myFile = context.getResources().getAssets().open(file);
-        Scanner EmotionWord = new Scanner(myFile);
-        String compare;
-        int score = 0;
-
-        while (EmotionWord.hasNextLine()) {
-            compare = EmotionWord.next();
-
-            if (word.equals(compare)) {
-                char[] temp =  EmotionWord.next().toCharArray();
-                if (temp.length == 1) {
-                    score = score + Character.getNumericValue(temp[0]);
-                } else {
-                    score = score - Character.getNumericValue(temp[1]);
-                }
-                break;
-            }
-            EmotionWord.nextLine();
-        }
-        return score;
-    }
-
-    public int getEmojiScore(String word) throws IOException {                 //search through the EmojiLookupTable.txt to check if particular word exists in the dictionary
-
-        String file = "EmojiLookupTable.txt";
-        InputStream myFile = context.getResources().getAssets().open(file);
-        Scanner Emoji = new Scanner(myFile);
-        String compare;
-        int score = 0;
-
-        while (Emoji.hasNextLine()) {
-            compare = Emoji.next();
-
-            if (word.equals(compare)) {
-                char[] temp =  Emoji.next().toCharArray();
-                if (temp.length == 1) {
-                    score = score + Character.getNumericValue(temp[0]);
-                } else {
-                    score = score - Character.getNumericValue(temp[1]);
-                }
-                break;
-            }
-            Emoji.nextLine();
-        }
-        this.getResultEmoji = score;
-        return score;
-    }
-
-    public int getBoosterScore(String word) throws IOException {                //search through the BoosterWordList.txt to check if particular word exists in the dictionary
-        String compare;
-        String file = "BoosterWordList.txt";
-        InputStream myFile = context.getResources().getAssets().open(file);
-        int score=0;
-        Scanner BoosterWord = new Scanner(myFile);
-        while (BoosterWord.hasNextLine()) {
-
-            compare = BoosterWord.next();
-
-            if (word.equals(compare)) {
-                char[] temp = BoosterWord.next().toCharArray();             //decompose the word into char array. e.g -1 will be converted to ['-','1']
-                if (temp.length == 1) {                                       //if temp.length == 1 means it is a positive value
-                    score = score + Character.getNumericValue(temp[0]);
-                } else {
-                    score = score - Character.getNumericValue(temp[1]);
-                }
-                break;
-            }
-            BoosterWord.nextLine();
-        }
-        return score;
-    }
 }
+

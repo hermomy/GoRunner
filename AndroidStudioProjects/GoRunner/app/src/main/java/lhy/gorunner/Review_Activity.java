@@ -38,12 +38,12 @@ String[] item;
         setContentView(R.layout.review);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
-        Intent i = getIntent();
 
-        // user_id = i.getStringExtra("userID");
-        user_id = getIntent().getStringExtra("userID");
-        task_id = getIntent().getStringExtra("task_id");
 
+        //user_id = getIntent().getStringExtra("userID");
+       // task_id = getIntent().getStringExtra("task_id");
+        task_id = "2";
+        user_id = "1" ;
         // get Instance  of Database Adapter
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
@@ -80,18 +80,18 @@ String[] item;
             try {
                 int score = analysis1.run();
 
-                loginDataBaseAdapter.createComment(sentence, score, post_task_user, user_id);  // * user_id and post_task_user is reversed in this activity
+//                loginDataBaseAdapter.createComment(sentence, score, post_task_user, user_id);  // * user_id and post_task_user is reversed in this activity
+//
+//
+//                int rating = loginDataBaseAdapter.getReviewScore(post_task_user);
+//                loginDataBaseAdapter.insertRating(post_task_user, rating);
 
 
-                int rating = loginDataBaseAdapter.getReviewScore(post_task_user);
-                loginDataBaseAdapter.insertRating(post_task_user, rating);
-
-
-                Intent i1 = new Intent(getApplication(), OtherProfileActivity.class);
-                i1.putExtra("otherUserID", post_task_user);
-                i1.putExtra("userID", user_id);
-
-                startActivity(i1);
+//               // Intent i1 = new Intent(getApplication(), OtherProfileActivity.class);
+//                i1.putExtra("otherUserID", post_task_user);
+//                i1.putExtra("userID", user_id);
+//
+//                startActivity(i1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
