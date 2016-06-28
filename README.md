@@ -69,5 +69,11 @@ Profile
 - Click <Profile> from the drawer in Home
 - All user personal details will be displayed
 
+< For testing the sentiment analysis algorithm alone>
+* Run Terminal and execute the TestScore.java file under /Sentiment-Analysis directory in order to test the algorithm 
+* Type in any sentence that consists of emotion word (good,bad), booster word (damn,very) and emoji( :), :() 
+
+
+
 
 
