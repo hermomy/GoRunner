@@ -5,6 +5,16 @@ This is an android application for acadamic purpose!
 
 Welcome to GoRunner
 
+*
+Default account as below:
+Email: lhy@gmail.com
+Password: 0000
+
+Project Setup will be included in the final report 
+
+—— IMPORTANT ——
+This application only able to run/test on a real physical device. The emulator is not working as the file size of the application will caused out of memory error on the emulator. Any question please contact following email address - lhy_xiaohao@hotmail.com
+
 Features:
 
 Login & Registration
@@ -59,14 +69,5 @@ Profile
 - Click <Profile> from the drawer in Home
 - All user personal details will be displayed
 
-** 
-Default account as below:
-Email: lhy@gmail.com
-Password: 0000
 
-Project Setup will be included in the final report 
-
-
-—— IMPORTANT ——
-This application only able to run/test on a real physical device. The emulator is not working as the file size of the application will caused out of memory error on the emulator. Any question please contact following email address - khcy3lha@nottingham.edu.my
 
