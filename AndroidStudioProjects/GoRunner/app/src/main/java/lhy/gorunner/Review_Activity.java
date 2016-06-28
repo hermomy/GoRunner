@@ -30,7 +30,8 @@ public class Review_Activity extends AppCompatActivity {
     EditText content;
     String task_id;
     String post_task_user;
-String[] item;
+    String[] item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,10 +41,9 @@ String[] item;
         setSupportActionBar(toolbar);
 
 
-        //user_id = getIntent().getStringExtra("userID");
-       // task_id = getIntent().getStringExtra("task_id");
-        task_id = "2";
-        user_id = "1" ;
+        user_id = getIntent().getStringExtra("userID");
+        task_id = getIntent().getStringExtra("task_id");
+
         // get Instance  of Database Adapter
         loginDataBaseAdapter = new LoginDataBaseAdapter(this);
         loginDataBaseAdapter = loginDataBaseAdapter.open();
